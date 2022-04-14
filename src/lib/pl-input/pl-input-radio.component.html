@@ -1,0 +1,7 @@
+<div class="pl-input-radio" [ngClass]="classesContainer" (click)="change()">
+    <input type="radio" class="x-qa-{{value}}" [attr.name]="name" [name]="name" [(ngModel)]="modelMask" [value]="valueMask" [disabled]="disabled" />
+    <div class="icon-container">
+        <div class="dot"></div>
+    </div>
+    <label class="label-radio">{{ label }}</label>
+</div>

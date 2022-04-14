@@ -1,0 +1,13 @@
+<div>
+  <ng-content select="pl-profile-header-cameo"></ng-content>
+  <div>
+    <ng-content select="pl-profile-header-title"></ng-content>
+    <ng-content select="pl-profile-header-body"></ng-content>
+  </div>
+  <div class="closeBtn" *ngIf="showCloseBtn" (click)="onClose()">
+    <pl-icon class="white margin-small-r" [svg]="'close-inverted'" [scale]="1.5"></pl-icon>
+  </div>
+</div>
+<div class="tabs">
+  <ng-content select="pl-profile-header-tabs"></ng-content>
+</div>

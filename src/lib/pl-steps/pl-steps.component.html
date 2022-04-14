@@ -1,0 +1,20 @@
+<div class="pl-steps" (window:resize)="onResizeEle($event)" [ngClass]="classesContainer">
+    <div *ngFor="let step of stepsDisplay; let index = index;" class="step" [ngClass]="step.classes">
+        <!-- Enabled link version -->
+        <pl-link *ngIf="step.classes.visited" class="inline-block" [href]="step.href" [queryParams]="step.hrefQueryParams" [replaceHistory]="step.replaceHistory" [classesLink]="'a-link link-none'">
+            <h5 class="step-name"> {{ step.label }}</h5>
+            <div class="circle">
+                <span>{{ (index + 1) }}</span>
+            </div>
+            <div class="progress-line"></div>
+        </pl-link>
+        <!-- Disabled version -->
+        <a *ngIf="!step.classes.visited" class="link-unstyled">
+            <h5 class="step-name"> {{ step.label }}</h5>
+            <div class="circle">
+                <span>{{ (index + 1) }}</span>
+            </div>
+            <div class="progress-line"></div>
+        </a>
+    </div>
+</div>

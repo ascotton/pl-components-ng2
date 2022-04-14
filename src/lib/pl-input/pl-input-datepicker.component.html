@@ -1,0 +1,14 @@
+<div class="pl-input-datepicker" [ngClass]="classesContainer" (keyup)="onDatePickerKeyUp($event)">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="select-and-options relative">
+        <div #input class="select-button">
+            <pl-input-text [(model)]="modelDisplay" [iconRight]="'schedule'" (onClickIconRight)="toggleFocus()" [placeholder]="placeholder" [disabled]="disabled" (onChange)="onChangeInput($event)" (click)="openDatePicker()" (onBlur)="onBlurInput($event)"></pl-input-text>
+        </div>
+        <pl-input-dropdown class="dropdown" [hidden]="!focused" [containerSelector]="dropdownContainerSelector" (onBlur)="onBlurDropdown($event)">
+            <div #dropdown class="padding mini-calendar">
+                <pl-mini-calendar [(model)]="model" [format]="format" [firstDayOfWeek]="firstDayOfWeek" [minDate]="minDate" [maxDate]="maxDate" [selectedRange]="selectedRange" [todayRange]="todayRange" [monthOptsFormat]="monthOptsFormat" [reverseYearSort]="reverseYearSort" [scrollToYearByValue]="scrollToYearByValue" [scrollToYearByLabel]="scrollToYearByLabel" (onChange)="onChangeDatepicker()"></pl-mini-calendar>
+            </div>
+        </pl-input-dropdown>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

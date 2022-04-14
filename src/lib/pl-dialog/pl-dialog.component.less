@@ -1,0 +1,136 @@
+@import '../core/colors.less';
+@import '../core/spacing.less';
+@import '../core/flexbox.less';
+
+@import '../core/components-defaults/pl-toast.less';
+
+.pl-toast-state (@background, @border) {
+    background-color: @background;
+    border-color: @border;
+    .left-icon {
+        background-color: @border;
+        fill: @border;
+    }
+}
+
+.pl-dialog-background {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+
+	.pl-dialog {
+		width: 455px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -137px;
+		margin-left: -227px;
+		display: flex;
+		flex-direction: column;
+
+        &.default {
+    		.dialog-header {
+    			background-color: #35434f;
+    			color: @white;
+    			padding: 13px;
+    			border-top-left-radius: 4px;
+    			border-top-right-radius: 4px;
+    			border: solid 1px @gray-darker;
+    			border-bottom: 0;
+    			display: flex;
+    			.header-text {
+    				font-family: Roboto;
+    				font-size: 14px;
+    				font-weight: bold;
+    				line-height: 1.29;
+    			}
+    	        .close-icon {
+    	            cursor: pointer;
+    	            fill: @white;
+    	            margin-left: auto;
+    	        }
+    		}
+    		.dialog-body {
+    			background-color: @white;
+    			padding: 20px 0 20px 20px;
+    			flex-grow: 2;
+    			border: solid 1px @gray-darker;
+    			border-bottom: 0;
+    			border-top: 0;
+    		}
+    		.dialog-buttons {
+    			background-color: @white;
+    			padding: 0 0 20px 20px;
+    			border-bottom-left-radius: 4px;
+    			border-bottom-right-radius: 4px;
+    			border: solid 1px @gray-darker;
+    			border-top: 0;
+    		}
+        }
+
+        &.toast {
+            .pl-dialog-alert {
+                .flexbox;
+
+                border-style: solid;
+                border-width: 1px;
+                border-radius: 4px;
+
+                .dialog-body {
+                    .padding;
+                }
+
+                .left-icon {
+                    .flexbox;
+                    justify-content: center;
+                    align-items: center;
+
+                    .left-icon-svg {
+                        border-radius: 100px;
+                        padding: 4px;
+                        background-color: @pl-toast-icon-background;
+                    }
+                }
+                .content {
+                    .flex1;
+                    padding-bottom: 30px;
+                    .padding-l;
+                }
+            }
+
+            .dialog-header {
+                .flexbox;
+
+                .header-text {
+                    .flex1;
+                    content: "&nbsp;";
+                }
+                .close-icon {
+                    fill: @pl-toast-close-icon;
+                    cursor: pointer;
+                    .padding;
+                }
+            }
+
+            &.error .pl-dialog-alert {
+                .pl-toast-state(@pl-toast-error, @pl-toast-error-border);
+            }
+            &.warning .pl-dialog-alert {
+                .pl-toast-state(@pl-toast-warning, @pl-toast-warning-border);
+            }
+            &.info .pl-dialog-alert {
+                .pl-toast-state(@pl-toast-info, @pl-toast-info-border);
+            }
+            &.success .pl-dialog-alert {
+                .pl-toast-state(@pl-toast-success, @pl-toast-success-border);
+            }
+        }
+	}
+
+}

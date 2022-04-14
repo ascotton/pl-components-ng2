@@ -1,0 +1,11 @@
+<div class="cell-wrapper" [ngClass]="{ 'expanded': isExpanded }">
+    <ng-content></ng-content>
+</div>
+<div
+    [@expansionAnimation]="expansionAnimationState()"
+    (@expansionAnimation.done)="expansionAnimationDone($event)"
+    class="cell-wrapper-expansion"
+    [ngClass]="{ 'expanded': isExpanded }"
+>
+    <ng-content select="[expandable]"></ng-content>
+</div>

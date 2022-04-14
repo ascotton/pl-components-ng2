@@ -1,0 +1,22 @@
+<div class="pl-input-select-api" [ngClass]="classesContainer">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="select-and-options relative">
+        <div #inputFilter class="select-button">
+            <pl-input-text [(model)]="filterModel" [iconLeft]="'magnifier'" [clearButton]="true" [placeholder]="filterPlaceholder" [disabled]="disabled" [classes]="classes" (onChange)="onChangeFilter($event)" (onFocus)="onFocusFilter($event)" (onBlur)="onBlurFilter($event)"></pl-input-text>
+        </div>
+        <pl-input-dropdown class="dropdown" [hidden]="!focused" [containerSelector]="dropdownContainerSelector">
+            <div *ngIf="loading" class="loading padding-lr padding-tb">
+                Loading..
+            </div>
+            <div *ngIf="filteredOptions.length < 1 && filterModel && !loading" class="padding-lr padding-tb">
+                {{ noResultsText }}
+            </div>
+            <div class="options-container">
+                <div class="options">
+                    <div *ngFor="let option of filteredOptions" class="option" (click)="selectOption(option)">{{ option.label }}</div>
+                </div>
+            </div>
+        </pl-input-dropdown>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

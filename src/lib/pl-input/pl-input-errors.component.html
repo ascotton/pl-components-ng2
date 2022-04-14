@@ -1,0 +1,22 @@
+<div class="pl-input-errors" *ngIf="formControl.errors && (formControl.dirty || formControl.touched)">
+    <!-- <div *ngFor="let error of errors" class="error">{{ error.text }}</div> -->
+    <div [hidden]="!formControl.errors.required" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.required }}</div>
+    <div [hidden]="!formControl.errors.checkboxrequired" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.checkboxrequired }}</div>
+    <div [hidden]="!formControl.errors.arrayrequired" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.arrayrequired }}</div>
+    <div [hidden]="!formControl.errors.filerequired" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.filerequired }}</div>
+    <div [hidden]="!formControl.errors.maxfilesize" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.maxfilesize }}</div>
+    <div [hidden]="!formControl.errors.fileextensions" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.fileextensions }}</div>
+    <div [hidden]="!formControl.errors.minlength" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.minlength }}</div>
+    <div [hidden]="!formControl.errors.maxlength" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.maxlength }}</div>
+    <div [hidden]="!formControl.errors.min" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.min }}</div>
+    <div [hidden]="!formControl.errors.max" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.max }}</div>
+    <div [hidden]="!formControl.errors.number" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.number }}</div>
+    <div [hidden]="!formControl.errors.pattern" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.pattern }}</div>
+    <div [hidden]="!formControl.errors.email" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.email }}</div>
+    <div [hidden]="!formControl.errors.url" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.url }}</div>
+    <div [hidden]="!formControl.errors.tel" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.tel }}</div>
+    <div [hidden]="!formControl.errors.zipcode" class="error"><ng-container *ngTemplateOutlet="plInputErrorIcon"></ng-container>{{ messages.zipcode }}</div>
+</div>
+<!-- <div *ngIf="formControl">DEBUG: {{ formControl.valid }} {{ formControl.errors | json }}</div> -->
+
+<ng-template #plInputErrorIcon><pl-icon class="red margin-small-r" [svg]="'close'" [scale]="0.7" [verticalAlign]="'-2px'"></pl-icon></ng-template>

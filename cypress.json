@@ -1,0 +1,9 @@
+{
+  "projectId": "5de9b092-2562-44f7-b5fa-a7def2956fd4",
+  "baseUrl": "http://localhost:4200/components",
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "test-results/e2e-results.xml",
+    "toConsole": true
+  }
+}

@@ -1,0 +1,112 @@
+@import '../core/spacing.less';
+@import '../core/flexbox.less';
+
+@import '../core/components-defaults/pl-toast.less';
+
+.pl-toast-state (@background, @border) {
+    background-color: @background;
+    border-color: @border;
+    .left-icon {
+        background-color: @border;
+        fill: @border;
+    }
+}
+
+.pl-toast {
+    display: none;
+    position: fixed;
+    //width: 100%;
+    left: 0;
+    right: 0;
+    .padding-lr;
+    z-index: 99999;
+    opacity: 1;
+
+    .alert {
+        color: @pl-toast-color;
+        text-align: center;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 4px;
+        max-width: 500px;
+        border-style: solid;
+        border-width: 1px;
+
+        .close-icon-top {
+            text-align: right;
+        }
+        .close-icon {
+            cursor: pointer;
+            .padding;
+            fill: @pl-toast-close-icon;
+        }
+
+        .message {
+            .flexbox;
+
+            .text {
+                .flex1;
+                .padding;
+            }
+        }
+        .left-icon {
+            display: none;
+        }
+    }
+
+    &.closeOnTop {
+        .message {
+            padding-top: 0px;
+            padding-bottom: 30px;
+        }
+    }
+    &.leftIcon {
+        .alert {
+            text-align: left;
+        }
+
+        .alert-content {
+            .flexbox;
+
+            .message {
+                .padding-l;
+            }
+
+            .left-icon {
+                .flexbox;
+                justify-content: center;
+                align-items: center;
+
+                .left-icon-svg {
+                    border-radius: 100px;
+                    padding: 4px;
+                    background-color: @pl-toast-icon-background;
+                }
+            }
+            .content {
+                .flex1;
+            }
+        }
+    }
+
+    &.visible {
+        display: block;
+    }
+    &.hiding {
+        opacity: 0;
+        transition: opacity 1s;
+    }
+    &.error .alert {
+        .pl-toast-state(@pl-toast-error, @pl-toast-error-border);
+    }
+    &.warning .alert {
+        .pl-toast-state(@pl-toast-warning, @pl-toast-warning-border);
+    }
+    &.info .alert {
+        .pl-toast-state(@pl-toast-info, @pl-toast-info-border);
+    }
+    &.success .alert {
+        .pl-toast-state(@pl-toast-success, @pl-toast-success-border);
+    }
+}

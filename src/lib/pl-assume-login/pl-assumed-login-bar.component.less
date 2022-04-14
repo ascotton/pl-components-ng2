@@ -1,0 +1,76 @@
+@import '../core/colors.less';
+@import '../core/colors-classes.less';
+@import '../core/flexbox.less';
+@import '../core/layout.less';
+@import '../core/link.less';
+@import '../core/spacing.less';
+@import '../core/typography.less';
+
+.assumed-login-bar-background-color {
+    background-color: @orange;
+}
+
+.assumed-login-bar {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    transition: transform 200ms;
+    // Transition translateY from 100% to 0 and back again to fake animating the
+    // height. The height is not fixed, so we can't transition the height property
+    // directly.
+    transform: translateY(100%);
+    z-index: 1000;
+    .white();
+
+    &.expanded {
+      transform: none;
+
+      .assumed-login-bar-tab, {
+        .assumed-login-bar-tab-visual {
+          top: 10px;
+        }
+      }
+    }
+
+    .assumed-login-bar-tab,  {
+        height: 30px;
+        width: 120px;
+        .margin-center();
+        .pointer();
+
+        .assumed-login-bar-tab-visual {
+            .assumed-login-bar-background-color();
+            border-radius: 4px 4px 0 0;
+            height: 20px;
+            position: relative;
+            top: -20px;
+            transition: top 200ms;
+            width: 100px;
+            .margin-center();
+
+            pl-icon {
+              display: block;
+              .center();
+            }
+        }
+    }
+
+    .assumed-login-bar-body {
+        flex-direction: row-reverse;
+        .assumed-login-bar-background-color();
+        .bold();
+        .flexbox();
+        .padding();
+
+        a {
+          order: 1;
+        }
+
+        p {
+          flex: auto;
+          line-height: 32px;
+          order: 2;
+        }
+    }
+}

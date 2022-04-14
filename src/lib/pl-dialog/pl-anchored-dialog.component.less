@@ -1,0 +1,39 @@
+@import '../core/colors.less';
+@import '../core/decoration.less';
+@import '../core/spacing.less';
+
+:host {
+    background-color: @gray-really-light;
+    bottom: 0;
+    box-shadow: @box-shadow-component;
+    position: fixed;
+    right: @spacing-large;
+    z-index: 999; /* replace with layer name */
+}
+
+.header {
+    align-items: center;
+    background-color: @slate-light;
+    color: @gray-darkest;
+    display: flex;
+    height: 4rem;
+    .padding-lr;
+
+    .title {
+        flex-grow: 1;
+        font-size: 1.4rem;
+    }
+
+    .expand-collapse-button,
+    .close-button {
+        border-width: 0;
+        justify-self: flex-end;
+        margin: 0;
+        padding-right: 0;
+        .padding-large-l;
+    }
+}
+
+.body {
+    .padding-large-b;
+}

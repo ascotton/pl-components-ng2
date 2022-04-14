@@ -1,0 +1,99 @@
+@import '../colors.less';
+
+@pl-button-disabled-color: @white;
+@pl-button-disabled-border: @gray-light;
+@pl-button-disabled-background: @gray-light;
+@pl-button-disabled-color-hover: @white;
+@pl-button-disabled-border-hover: @gray-light;
+@pl-button-disabled-background-hover: @gray;
+
+@pl-button-link-color: @blue-medium;
+@pl-button-link-border: transparent;
+@pl-button-link-background: transparent;
+@pl-button-link-color-hover: @blue;
+@pl-button-link-border-hover: transparent;
+@pl-button-link-background-hover: transparent;
+
+@pl-button-bare-color: @blue-medium;
+@pl-button-bare-border: transparent;
+@pl-button-bare-background: transparent;
+@pl-button-bare-color-hover: @white;
+@pl-button-bare-border-hover: @blue;
+@pl-button-bare-background-hover: @blue;
+
+@pl-button-default-color: @gray-darkest;
+@pl-button-default-border: @gray-darkest;
+@pl-button-default-background: transparent;
+@pl-button-default-color-hover: @blue-medium;
+@pl-button-default-border-hover: @blue-medium;
+@pl-button-default-background-hover: transparent;
+
+@pl-button-default-reverse-color: @gray-lightest;
+@pl-button-default-reverse-border: @gray-lightest;
+@pl-button-default-reverse-background: transparent;
+@pl-button-default-reverse-color-hover: @gray-lightest;
+@pl-button-default-reverse-border-hover: @gray-lightest;
+@pl-button-default-reverse-background-hover: transparent;
+
+@pl-button-primary-color: @white;
+@pl-button-primary-border: @orange-dark;
+@pl-button-primary-background: @orange;
+@pl-button-primary-color-hover: @white;
+@pl-button-primary-border-hover: @orange-dark;
+@pl-button-primary-background-hover: @orange-dark;
+
+@pl-button-info-color: @white;
+@pl-button-info-border: @blue;
+@pl-button-info-background: @blue-medium;
+@pl-button-info-color-hover: @white;
+@pl-button-info-border-hover: @blue;
+@pl-button-info-background-hover: @blue;
+
+@pl-button-warning-color: @white;
+@pl-button-warning-border: darken(@yellow, 20%);
+@pl-button-warning-background: @yellow;
+@pl-button-warning-color-hover: @white;
+@pl-button-warning-border-hover: darken(@yellow, 20%);
+@pl-button-warning-background-hover: darken(@yellow, 20%);
+
+@pl-button-danger-color: @white;
+@pl-button-danger-border: darken(@red, 20%);
+@pl-button-danger-background: @red;
+@pl-button-danger-color-hover: @white;
+@pl-button-danger-border-hover: darken(@red, 20%);
+@pl-button-danger-background-hover: darken(@red, 20%);
+
+@pl-button-success-color: @white;
+@pl-button-success-border: @orange-dark;
+@pl-button-success-background: @orange;
+@pl-button-success-color-hover: @white;
+@pl-button-success-border-hover: @orange-dark;
+@pl-button-success-background-hover: @orange-dark;
+
+.btn-style (@color, @border, @background, @color-hover, @border-hover, @background-hover, @burst-color: lighten(@background, 20%)) {
+    color: @color;
+    border-color: @border;
+    background-color: @background;
+    figure svg { fill: @color }
+
+    pl-icon {
+        fill: @color;
+    }
+
+    [burst] { background-color: @burst-color }
+    &.hover, &:hover {
+        color: @color-hover;
+        border-color: @border-hover;
+        background-color: @background-hover;
+
+        pl-icon {
+            fill: @color-hover;
+        }
+    }
+}
+
+/**
+// Overrides - must be last.
+// TODO does not work with AOT; add '@' back in front of import as AOT ignores comments..?
+// import (optional) '../../../components-config/pl-button.less';
+*/

@@ -1,0 +1,30 @@
+<div class="pl-input-time" [ngClass]="classesContainer">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="select-and-options relative">
+        <div #input class="select-button" (click)="toggleOptionsOpen()">
+            <pl-input-text
+                [(model)]="modelInput"
+                [type]="'time'"
+                [placeholder]="placeholder"
+                [disabled]="disabled"
+                [iconRight]="'chevron-down'"
+                (onChange)="onChangeInput($event)"
+                (onFocus)="onFocusInput($event)"
+                (onBlur)="onBlurInput($event)"
+                (input)="inputEvent($event)">
+            </pl-input-text>
+        </div>
+        <pl-input-dropdown
+            class="dropdown"
+            [hidden]="!showOptions || !hasOptionsOpened"
+            [containerSelector]="dropdownContainerSelector"
+            (onBlur)="onBlurDropdown($event)">
+            <div #dropdown class="options-container">
+                <div class="options">
+                    <div *ngFor="let option of timeOptions" class="option" (click)="selectOption(option)">{{ option.label }}</div>
+                </div>
+            </div>
+        </pl-input-dropdown>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

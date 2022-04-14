@@ -1,0 +1,73 @@
+<div class="pl-app-nav" (window:resize)="onResizeEle($event)">
+    <nav class="topbar" [class.alert]="isAlert">
+        <div class="pl-app-nav-topbar-container flexbox" #menuContainer>
+            <div class="">
+                <div #navSidebarButton *ngIf="sidebarSide === 'left'" class="padding-tb padding-l inline-block menu-cont">
+                    <pl-icon class="blue-medium menu" [svg]="'menu'" (click)="toggleSidebar()"></pl-icon>
+                </div>
+                <a class="topbar-logo link-unstyled inline-block" [routerLink]="['/home']" (click)="onNavItemClicked($event)" *ngIf="!noLogoLink">
+                    <pl-icon svg="logo-color-no-tm" [width]="logo.width" [height]="logo.height" [verticalAlign]="logo.verticalAlign"></pl-icon>
+                </a>
+                <div class="topbar-logo link-unstyled inline-block" *ngIf="noLogoLink">
+                    <pl-icon svg="logo-color-no-tm" [width]="logo.width" [height]="logo.height" [verticalAlign]="logo.verticalAlign"></pl-icon>
+                </div>
+            </div>
+            <div class="flex1 x-qa-page-links pl-app-nav-links" [class.hidden]="!showLinks">
+                <a *ngFor="let link of links['page']" class="link-unstyled flex1 link" [routerLink]="link.href" routerLinkActive="active" (click)="onNavItemClicked($event)">
+                    <div class="icon-div">
+                        <pl-icon [svg]="link.icon" [scale]="1" class="icon"></pl-icon>
+                    </div>
+                    <div class="text">{{ link.label }}</div>
+                </a>
+                <a *ngFor="let link of links['app']" class="link-unstyled flex1 link" [href]="link.hrefAbsolute">
+                    <div class="icon-div">
+                        <pl-icon [svg]="link.icon" [scale]="1" class="icon"></pl-icon>
+                    </div>
+                    <div class="text">{{ link.label }}</div>
+                </a>
+            </div>
+            <div class="pl-app-nav-center flexbox">
+                <ng-content select="[pl-nav-center]"></ng-content>
+            </div>
+            <div class="pl-app-nav-right flexbox padding-large-r padding-xlarge-l">
+                <div class="pl-app-nav-right_content">
+                    <ng-content select="[pl-nav-right]"></ng-content>
+                </div>
+                <div #navSidebarButton class="pl-app-nav-user-info" (click)="toggleSidebar()">
+                    <div class="user-menu padding-small margin-l inline-block menu-cont">
+                        <pl-icon class="white menu" width="16" height="16" svg="user-outline"></pl-icon>
+                    </div>
+                    <div *ngIf="user && user.first_name" class="margin-l">
+                        {{ user.first_name }}
+                    </div>
+                    <pl-icon class="margin-l" width="12" height="12" svg="chevron-down"></pl-icon>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <nav #navSidebar class="sidebar" [ngClass]="classes.sidebar" [ngStyle]="stylesSidebar">
+        <div class="links">
+            <div *ngFor="let link of links['menu']" class="item">
+                <a *ngIf="link.href" class="link-unstyled flexbox" [ngClass]="getMenuItemClass(link)" [routerLink]="link.href">
+                    <div class="icon-div">
+                        <pl-icon [svg]="link.icon" [scale]="1" class="icon"></pl-icon>
+                    </div>
+                    <div class="text flex1">{{ link.label }}</div>
+                </a>
+                <a *ngIf="link.hrefAbsolute && !link.click" class="link-unstyled flexbox" [ngClass]="getMenuItemClass(link)" [href]="link.hrefAbsolute" [attr.target]="link.target">
+                    <div class="icon-div">
+                        <pl-icon [svg]="link.icon" [scale]="1" class="icon"></pl-icon>
+                    </div>
+                    <div class="text flex1">{{ link.label }}</div>
+                </a>
+                <a *ngIf="link.hrefAbsolute && link.click" class="link-unstyled flexbox" [ngClass]="getMenuItemClass(link)" [href]="link.hrefAbsolute" (click)="link.click()">
+                        <div class="icon-div">
+                            <pl-icon [svg]="link.icon" [scale]="1" class="icon"></pl-icon>
+                        </div>
+                        <div class="text flex1">{{ link.label }}</div>
+                    </a>
+            </div>
+        </div>
+    </nav>
+    <div class="spacer">&nbsp;</div>
+</div>

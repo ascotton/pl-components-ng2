@@ -1,0 +1,15 @@
+<div *ngIf="isAssumedLogin" class="assumed-login-bar"  [class.expanded]="isExpanded">
+    <div class="assumed-login-bar-tab" (click)="onTabClick()">
+        <div class="assumed-login-bar-tab-visual">
+            <pl-icon class="icon white" [svg]="tabIcon" [scale]="0.6" [verticalAlign]="'-6px'"></pl-icon>
+        </div>
+    </div>
+    <div class="assumed-login-bar-body">
+      <p>You are currently working on behalf of {{ username }}</p>
+      <a (click)="onReleaseClick()">
+          <button pl-button class="reverse inline">
+              Release {{ username }}
+          </button>
+      </a>
+    </div>
+</div>

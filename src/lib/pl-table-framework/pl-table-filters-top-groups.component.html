@@ -1,0 +1,61 @@
+<div class="filters-top-groups">
+
+    <div class="filters-primary">
+        <div class="flexbox">
+            <div *ngFor="let filter of filtersPrimary; let index = index;" class="filter-primary margin-large-r">
+                <!-- <div class="filter-name margin-r"><b>{{ filter.label }}</b></div> -->
+                <div class="input" *ngIf="filter.type === 'text'">
+                    <pl-input-text [(model)]="filter.text" [clearButton]="true" (onChange)="filterKeyup($event)" [placeholder]="(filter.placeholder || '')" [debounceChange]="'500'" [iconLeft]="'magnifier'"></pl-input-text>
+                </div>
+                <div class="input" *ngIf="filter.type === 'select'">
+                    <pl-input-select [(model)]="filter.text" [options]="filter.selectOpts" (onChange)="onFilter($event)" [placeholder]="(filter.placeholder || ' ')" [emptyOption]="true"></pl-input-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'selectApi'">
+                    <pl-input-select-api [(model)]="filter.text" [options]="filter.selectOptsApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true"></pl-input-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelect'">
+                    <pl-input-multi-select [(model)]="filter.textArray" [options]="filter.selectOptsMulti" [placeholder]="(filter.placeholder || ' ')" (onChange)="onFilter($event)"></pl-input-multi-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelectApi'">
+                    <pl-input-multi-select-api [(model)]="filter.textArray" [options]="filter.selectOptsMultiApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true" [resultsLimitedText]="filter.optionsLimitedText" [resultsTotalCount]="filter.selectOptsMultiApiTotalCount"></pl-input-multi-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'checkbox'">
+                    <pl-input-checkbox-group [(model)]="filter.textArray" [options]="filter.selectOptsCheckbox" (onChange)="onFilter($event)" [horizontal]="true" [optionWidth]="(filter.optionWidth || '100px')"></pl-input-checkbox-group>
+                </div>
+            </div>
+            <button *ngIf="canCloseFilters" pl-button class="filters-btn" [ngClass]="classes" (click)="toggleSecondary($event)">
+                <pl-icon [svg]="'filter'" [scale]="0.7" [verticalAlign]="'-2px'" class="margin-small-r"></pl-icon>
+                <span *ngIf="!secondaryVisible">Show Filters</span>
+                <span *ngIf="secondaryVisible">Hide Filters</span>
+            </button>
+        </div>
+    </div>
+
+    <div [hidden]="!secondaryVisible" class="filters-secondary">
+        <div class="flexbox">
+            <div *ngFor="let filter of filtersSecondary; let index = index;" class="filter-secondary margin-large-r">
+                <div class="filter-name">{{ filter.label }}:</div>
+                <div class="input" *ngIf="filter.type === 'text'">
+                    <pl-input-text [(model)]="filter.text" [clearButton]="true" (onChange)="filterKeyup($event)" [placeholder]="(filter.placeholder || '')" [debounceChange]="'500'"></pl-input-text>
+                </div>
+                <div class="input" *ngIf="filter.type === 'select'">
+                    <pl-input-select [(model)]="filter.text" [options]="filter.selectOpts" (onChange)="onFilter($event)" [emptyOption]="true" [placeholder]="(filter.placeholder || ' ')"></pl-input-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'selectApi'">
+                    <pl-input-select-api [(model)]="filter.text" [options]="filter.selectOptsApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true"></pl-input-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelect'">
+                    <pl-input-multi-select [(model)]="filter.textArray" [options]="filter.selectOptsMulti" (onChange)="onFilter($event)" [placeholder]="(filter.placeholder || '&nbsp;')"></pl-input-multi-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelectApi'">
+                    <pl-input-multi-select-api [(model)]="filter.textArray" [options]="filter.selectOptsMultiApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true" [resultsLimitedText]="filter.optionsLimitedText" [resultsTotalCount]="filter.selectOptsMultiApiTotalCount"></pl-input-multi-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'checkbox'">
+                    <pl-input-checkbox-group [(model)]="filter.textArray" [options]="filter.selectOptsCheckbox" (onChange)="onFilter($event)" [horizontal]="true" [optionWidth]="(filter.optionWidth || '100px')"></pl-input-checkbox-group>
+                </div>
+            </div>
+            <button pl-button class="link clear-btn" (click)="clearSecondaryFilters($event)">Clear</button>
+        </div>
+    </div>
+
+</div>

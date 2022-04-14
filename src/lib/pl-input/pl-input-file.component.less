@@ -1,0 +1,69 @@
+@import '../core/flexbox.less';
+@import '../core/layout.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-input.less';
+
+.pl-input-file {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .input-wrapper {
+        height: 100%;
+        .input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            line-height: 999px;     // arbitrarily large
+            z-index: 2;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .input-dropzone {
+            z-index: 1;
+            position: relative;
+            background-color: @pl-input-file-dropzone-background;
+            border: 2px dashed @pl-input-file-dropzone-border;
+            border-radius: 4px;
+            .padding-lr;
+            .padding-small-tb;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            pl-icon {
+                fill: @blue-medium;
+            }
+            &.error-mode {
+                border-color: @red;
+            }
+        }
+    }
+
+    .no-multiple {
+        .hidden-file-input {
+            display: none;
+        }
+    }
+
+    .file-list-item {
+        margin: 15px;
+    }
+
+    .remove-all-files {
+        margin: 15px;
+    }
+
+    .remove-file-button {
+        cursor: pointer;
+    }
+    .remove-all {
+        cursor: pointer;
+    }
+}

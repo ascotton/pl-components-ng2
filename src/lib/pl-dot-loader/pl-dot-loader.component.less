@@ -1,0 +1,104 @@
+@import '../core/components-defaults/pl-dot-loader.less';
+
+.pl-dot-loader {
+    &.center {
+        text-align: center;
+    }
+    &.left {
+        text-align: left;
+    }
+    &.right {
+        text-align: right;
+    }
+
+    &.default {
+        // TODO: this needs review.
+        // background-color: @pl-dot-loader-background;
+        .dot{
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            margin: 0 3px;
+            // arbitrarily large
+            border-radius: 200px;
+            position: relative;
+            top: -3px;
+            background-color: @pl-dot-loader-dots;
+            &.dot-1 {
+                animation: dot-loader-scale-up-default 1250ms infinite ease-out;
+            }
+            &.dot-2 {
+                animation: dot-loader-scale-up-default 1250ms 150ms infinite ease-out;
+            }
+            &.dot-3 {
+                animation: dot-loader-scale-up-default 1250ms 300ms infinite ease-out;
+            }
+        }
+    }
+
+    &.overlay {
+        position: relative;
+        background-color: @pl-dot-loader-background;
+        border-radius: 5px;
+        height: 25px;
+        padding: 3px 2px 2px;
+        width: 90px;
+        .dot {
+            background-color: @pl-dot-loader-dots;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+
+            &.dot-1 {
+                left: 15px;
+                animation: dot-loader-scale-up-overlay 1250ms infinite ease-out;
+            }
+
+            &.dot-2 {
+                left: 45px;
+                animation: dot-loader-scale-up-overlay 1250ms 150ms infinite ease-out;
+            }
+
+            &.dot-3 {
+                left: 75px;
+                animation: dot-loader-scale-up-overlay 1250ms 300ms infinite ease-out;
+            }
+        }
+    }
+
+}
+
+@keyframes dot-loader-scale-up-default {
+    0% {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(3.5);
+    }
+    30% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+
+@keyframes dot-loader-scale-up-overlay {
+    0% {
+        width: 5px;
+        height: 5px;
+    }
+    15% {
+        transform: translateY(-50%) scale(3);
+    }
+    30% {
+        width: 5px;
+        height: 5px;
+    }
+    100% {
+        width: 5px;
+        height: 5px;
+    }
+}

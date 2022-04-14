@@ -1,0 +1,34 @@
+<div class="pl-table-footer flexbox" [class.sticky-footer]="stickyFooter">
+    <div class="footer-total">
+        {{ totalLabel }}: <b>{{ total | commify }}</b>
+        <span *ngIf="selected"> | Selected: <b>{{ selected | commify }}</b></span>
+    </div>
+    <div class="flex1 pages">
+        <button pl-button class="page-arrow-prev" [disabled]="currentPage < 2" (click)="prevPage()">
+            <pl-icon class="page-arrow-icon" [svg]="'chevron-left'" [scale]="0.6" [verticalAlign]="'-1px'"></pl-icon>
+        </button>
+        <span>
+            Page
+            <pl-input-text class="current-page-input" [type]="'number'" [(model)]="currentPage" [min]="1" [max]="totalPages" [textAlignInput]="'center'" (onBlur)="changePage($event)" (keyup)="changePageKeyup($event)"></pl-input-text>
+            of {{ totalPages | commify }}
+        </span>
+        <button pl-button class="page-arrow-next" [disabled]="currentPage > (totalPages - 1)" (click)="nextPage()">
+            <pl-icon class="page-arrow-icon" [svg]="'chevron-right'" [scale]="0.6" [verticalAlign]="'-1px'"></pl-icon>
+        </button>
+    </div>
+    <div class="footer-items-per-page">
+        <div class="items-per-page-label inline-block">Items / Page: </div>
+        <pl-input-select
+            *ngIf="!useFixedPageSize"
+            class="inline-block"
+            [(model)]="pageSize"
+            [options]="pageSizeOpts"
+            [styleInline]="true"
+            [dropdownMinWidth]="50"
+            [placeholder]="''"
+            [filter]="false"
+            (onChange)="changePageSize()">
+        </pl-input-select>
+        <span *ngIf="useFixedPageSize"><b>{{ pageSize }}</b></span>
+    </div>
+</div>

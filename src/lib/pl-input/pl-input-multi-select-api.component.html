@@ -1,0 +1,47 @@
+<div #inputMultiSelect class="pl-input-multi-select-api" [ngClass]="classesContainer" (keydown)="keyDown($event);">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+
+    <div class="select-and-options relative">
+        <div #inputFilter class="select-button">
+            <pl-input-text class="search-filter" [(model)]="filterModel" [iconLeft]="'magnifier'" [clearButton]="true"
+                [placeholder]="filterPlaceholder" [disabled]="disabled" [onPreviewKeyDown]="onSearchInputPreviewKeyDown"
+                (onChange)="onChangeFilter($event)" (onFocus)="onFocusFilter($event)" (onBlur)="onBlurFilter($event)">
+            </pl-input-text>
+        </div>
+        <pl-input-dropdown class="dropdown" [hidden]="!focused" [containerSelector]="dropdownContainerSelector">
+            <div class="options-container">
+                <!-- <div class="filter padding">
+                    <pl-input-text [(model)]="filterModel" [iconLeft]="'magnifier'" [clearButton]="true" [placeholder]="filterPlaceholder" [focused]="focused" (onChange)="onChangeFilter($event)"></pl-input-text>
+                </div> -->
+                <div class="options-messages overlay">
+                    <div *ngIf="areResultsTruncated() && !loading" class="message">
+                        First {{ optionsCount() }} of {{ resultsTotalCount }} options.
+                    </div>
+                    <div *ngIf="loading" class="message">
+                        Loading…
+                    </div>
+                    <div *ngIf="filteredOptions.length < 1 && filterModel && !loading" class="message">
+                        {{ noResultsText }}
+                    </div>
+                    <div *ngIf="resultsLimitedText && resultsLimitedText.length > 0" class="message">
+                        {{ resultsLimitedText }}
+                    </div>
+                </div>
+                <div class="options">
+                    <div *ngFor="let option of selectedOptions" class="option">
+                        <pl-input-checkbox [(model)]="option.selected" [label]="option.label"
+                            [clickableAreaExpanded]="true" (onChange)="toggleOption(option)"></pl-input-checkbox>
+                    </div>
+                    <div *ngFor="let option of filteredOptions" class="option">
+                        <pl-input-checkbox [(model)]="option.selected" [label]="option.label"
+                            [clickableAreaExpanded]="true" (onChange)="toggleOption(option)"></pl-input-checkbox>
+                    </div>
+                </div>
+            </div>
+        </pl-input-dropdown>
+        <div>{{ selectedText }}</div>
+    </div>
+
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages">
+    </pl-input-errors>
+</div>

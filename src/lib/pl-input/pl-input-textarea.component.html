@@ -1,0 +1,11 @@
+<div>
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="pl-input-textarea border" [ngClass]="classesContainer" [ngStyle]="stylesContainer">
+        <textarea *ngIf="formCtrl" [(ngModel)]="model" [name]="name" [formControl]="formCtrl.controls[name]" (focus)="focus($event)" (blur)="change($event);blur($event)" (keyup)="change($event)" (keydown.Tab)="keydownTab($event)" (keydown.shift.Tab)="keydownTab($event)" [placeholder]="placeholder" [ngClass]="{'resizable':resizable==true}" [required]="required" [minlength]="minlength" [maxlength]="maxlength" [pattern]="pattern">
+        </textarea>
+        <!-- Same as above but without formControl and WITH disabled -->
+        <textarea *ngIf="!formCtrl" [(ngModel)]="model" [name]="name" [disabled]="disabled" (focus)="focus($event)" (blur)="change($event);blur($event)" (keyup)="change($event)" (keydown.Tab)="keydownTab($event)" (keydown.shift.Tab)="keydownTab($event)" [placeholder]="placeholder" [ngClass]="{'resizable':resizable==true}" [required]="required" [minlength]="minlength" [maxlength]="maxlength" [pattern]="pattern">
+        </textarea>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages" [minlength]="minlength" [maxlength]="maxlength"></pl-input-errors>
+</div>

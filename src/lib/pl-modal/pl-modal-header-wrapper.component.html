@@ -1,0 +1,7 @@
+<div class="modal-header">
+    <span class="header-text">{{ headerText}}</span>
+    <pl-icon (click)="hide()" class="close-icon" [svg]="'close-inverted'"></pl-icon>
+</div>
+<div #plModalHeaderWrapperBody class="modal-body" tabindex="-1">
+    <ng-content></ng-content>
+</div>

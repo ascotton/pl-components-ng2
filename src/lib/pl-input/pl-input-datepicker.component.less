@@ -1,0 +1,19 @@
+@import '../core/flexbox.less';
+@import '../core/layout.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-input.less';
+
+.pl-input-datepicker {
+    &.focused {
+        .select-and-options {
+            z-index: 100;
+        }
+    }
+
+    .dropdown {
+        background-color: @pl-input-dropdown-background;
+        min-width: 300px;
+        max-width: 400px;
+    }
+}

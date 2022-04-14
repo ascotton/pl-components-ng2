@@ -1,0 +1,86 @@
+@import '../core/spacing.less';
+@import '../core/flexbox.less';
+
+@import '../core/components-defaults/pl-input.less';
+
+.pl-mini-calendar {
+    .nav {
+        .next-previous, .month-select, .year-select {
+            display: inline-block;
+            .margin-small-r;
+        }
+        .month-select, .year-select {
+            min-width: 75px;
+        }
+        .previous, .next {
+            cursor: pointer;
+            border: 1px solid;
+            border-color: @pl-mini-calendar-next-prev;
+            color: @pl-mini-calendar-next-prev;
+            fill: @pl-mini-calendar-next-prev;
+            padding: 8px 11px;
+            display: inline-block;
+
+            &:hover {
+                fill: @pl-input-border-focus;
+                color: @pl-input-border-focus;
+                border-color: @pl-input-border-focus;
+            }
+        }
+        .previous {
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+        }
+        .next {
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            border-left: 0;
+            margin-left: -3px;
+        }
+    }
+
+    .weekdays-header {
+        .weekday-header {
+            flex-basis: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+
+    .dates-row {
+        width: 100%;
+
+        .dates-column {
+            color: @pl-mini-calendar-dates-text;
+            cursor: pointer;
+            flex-basis: 0;
+            text-align: center;
+
+            &.nonCurrentMonth {
+                color: @gray;
+            }
+            &.selectedRange {
+                background-color: @pl-mini-calendar-dates-selected-range;
+            }
+            &.todayRange {
+                background-color: @pl-mini-calendar-dates-today-range;
+            }
+            &.today {
+                background-color: @pl-mini-calendar-dates-today;
+            }
+            &.selected {
+                background-color: @pl-mini-calendar-dates-selected;
+                font-weight: bold;
+            }
+            &.disabled {
+                color: @pl-mini-calendar-dates-disabled;
+                cursor: auto;
+            }
+
+            &:hover {
+                background-color: @pl-input-border-focus;
+                color: white;
+            }
+        }
+    }
+}

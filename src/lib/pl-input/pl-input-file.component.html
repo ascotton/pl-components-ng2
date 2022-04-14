@@ -1,0 +1,38 @@
+<div #xQAEleRef class="pl-input-file" [ngClass]="classesContainer">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div>
+        <div *ngIf="dropzone" class="input-wrapper">
+            <div class="input-dropzone" [ngClass] ="{'error-mode': errorMode}">
+                <pl-icon class="gray" [svg]="'upload'" [scale]="1.5" [height]="50" [width]="50" ></pl-icon>
+                <div>{{ dragText }}</div>
+                <div>OR</div>
+                <div><a>{{ clickText }}</a></div>
+                <input #fileInputEleRef class="input" type="file" [multiple]="multiple" [accept]="mimeTypes" [disabled]="disabled" (change)="onChangeInput($event)" />
+            </div>
+        </div>
+        <div *ngIf="!dropzone" class="no-multiple">
+            <label pl-button for="{{file_input_id}}">Choose File</label>
+            <input #fileInputEleRef id="{{file_input_id}}" class="input hidden-file-input" type="file" [multiple]="multiple" [accept]="mimeTypes" [disabled]="disabled" (change)="onChangeInput($event)" />
+        </div>
+    </div>
+    <div class="file-list-item" *ngFor="let file of existingFiles; let index = index;">
+        <div *ngIf="file.name">
+            {{ file.name }} <pl-icon *ngIf="!disabled" class="gray remove-file-button" [svg]="'close'" (click)="removeExistingFile(file, index)"></pl-icon>
+        </div>
+    </div>
+    <div *ngIf="selectedFiles.length" class="remove-all-files">
+        <span *ngIf="!disabled" (click)="removeAllUploadedFiles()" class="remove-all">
+            <pl-icon class="gray remove-file-button" [svg]="'close'"></pl-icon>
+            <a *ngIf="selectedFiles.length>1">Clear Uploaded Files</a>
+            <a *ngIf="selectedFiles.length===1">Clear Uploaded File</a>
+        </span>
+        <!-- <div *ngFor="let file of model.files"> -->
+        <div *ngFor="let file of selectedFiles">
+            <div *ngIf="file.name">
+                <!-- {{ file.name }} <pl-icon class="gray remove-file-button" [svg]="'close'" (click)="removeFile(file, index)"></pl-icon> -->
+                {{ file.name }}
+            </div>
+        </div>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages" [maxfilesize]="maxFileSize" [fileextensions]="extensions"></pl-input-errors>
+</div>

@@ -1,0 +1,75 @@
+@import '../core/components-defaults/pl-button.less';
+@import '../core/components-defaults/pl-button-group.less';
+
+@plButtonGroupRadius: 100px;
+
+.btn-group-style (@color, @border, @background) {
+    &, [pl-button], .pl-button {
+        border-color: @border;
+    }
+    .pl-button.selected {
+        background-color: @background;
+        color: @color;
+    }
+}
+
+// Use flexbox to remove space between buttons so need to wrap it to still be inline.
+// https://css-tricks.com/fighting-the-space-between-inline-block-elements/
+//.pl-button-group-wrapper {
+    //display: inline-block;
+//}
+
+pl-button-group, [pl-button-group], .pl-button-group {
+	display: flex;
+	border-radius: @plButtonGroupRadius;
+
+    [pl-button], .pl-button {
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+    }
+    [pl-button], .pl-button {
+      &:not(:first-child) {
+        border-left-width: 1px;
+        border-left-style: solid;
+        //border-right-width: 1px;
+        //border-right-style: solid;
+
+      }
+    }
+    [pl-button], .pl-button{
+      &:first-child {
+        border-top-left-radius: @plButtonGroupRadius;
+        border-bottom-left-radius: @plButtonGroupRadius;
+        border-left:none;
+      }
+    }
+    [pl-button], .pl-button{
+      &:last-child {
+        border-top-right-radius: @plButtonGroupRadius;
+        border-bottom-right-radius: @plButtonGroupRadius;
+        border-right: none;
+      }
+    }
+
+    // Default
+    border: solid 1px @pl-button-default-border;
+    background-color: @pl-button-default-background;
+
+	// colors
+	&.primary {
+        .btn-group-style(@pl-button-primary-color, @pl-button-primary-border, @pl-button-primary-background);
+    }
+    &.info {
+        .btn-group-style(@pl-button-info-color, @pl-button-info-border, @pl-button-info-background);
+    }
+    &.warning {
+        .btn-group-style(@pl-button-warning-color, @pl-button-warning-border, @pl-button-warning-background);
+    }
+    &.danger {
+        .btn-group-style(@pl-button-danger-color, @pl-button-danger-border, @pl-button-danger-background);
+    }
+    &.success {
+        .btn-group-style(@pl-button-success-color, @pl-button-success-border, @pl-button-success-background);
+    }
+}

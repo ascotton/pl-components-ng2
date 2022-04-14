@@ -1,0 +1,13 @@
+<div class="pl-browser-unsupported">
+    <h2 class="header"><b>Your browser is not supported</b></h2>
+    <h3 class="sub-header"><b>Please switch to one of the following browsers.</b></h3>
+    <!-- <h6 class="margin-large-b">If you do not have Firefox or Chrome click one of the links below to install:</h6> -->
+    <div class="browsers">
+        <div *ngFor="let browser of supportedBrowsers" class="browser-item">
+            <a [href]="browser.href" target="_blank">
+                <div><img [src]="browser.img" /></div>
+                <div>{{ browser.name }}</div>
+            </a>
+        </div>
+    </div>
+</div>

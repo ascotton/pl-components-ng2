@@ -1,0 +1,78 @@
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-input.less';
+
+.border {
+    display:flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    border: solid @pl-input-border 1px;
+    border-left-width: 1px;
+    transition: border-left-width 150ms;
+    background-color: @pl-input-textarea-background;
+
+    &.focused {
+        border-left-width: 12px;
+        border-color: @pl-input-border-focus;
+
+        .input-prefix, .input-suffix, .icon-left, .icon-right {
+            fill: @pl-input-border-focus;
+            color: @pl-input-border-focus;
+        }
+
+        &.emptyValue {
+            .input-suffix.clear-button, .icon-right.clear-button {
+                //fill: @pl-input-text-icon;
+                //color: @pl-input-text-icon;
+                display: none;
+            }
+        }
+    }
+
+    &.emptyValue {
+        .input-suffix.clear-button, .icon-right.clear-button {
+            display: none;
+        }
+    }
+
+    .input-prefix, .input-suffix, .icon-left, .icon-right {
+        box-sizing: border-box;
+        display: block;
+        width: auto;
+        max-width: 20px;
+        fill: @pl-input-text-icon;
+        color: @pl-input-text-icon;
+
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+input, textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    line-height: 30px;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 0 7px;
+    border: 0;
+    outline: none;
+    box-shadow: none;
+    color: @pl-input-text-color;
+}
+
+textarea {
+    height:100%;
+    line-height: 1.5em;
+    resize:none;
+    &.resizable {
+        resize:both;
+    }
+}
+
+input {
+    height: 30px;
+}

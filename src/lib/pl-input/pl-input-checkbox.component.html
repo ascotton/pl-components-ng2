@@ -1,0 +1,12 @@
+<div #inputCheckBox>
+    <div class="pl-input-checkbox" [ngClass]="classesContainer" (click)="change()">
+        <input *ngIf="formCtrl" type="checkbox" [(ngModel)]="model" [name]="name" [formControl]="formCtrl.controls[name]" [required]="required" />
+        <!-- Same as above but without formControl and WITH disabled -->
+        <input *ngIf="!formCtrl" type="checkbox" [(ngModel)]="model" [name]="name" [disabled]="disabled" [required]="required" />
+        <div class="icon-container">
+            <pl-icon class="icon" [svg]="'check'" [scale]="0.8" [verticalAlign]="'-6px'"></pl-icon>
+        </div>
+        <label class="label-checkbox">{{ label }}</label>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

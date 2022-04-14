@@ -1,0 +1,12 @@
+<div class="header">
+    <span class="title">{{ title }}</span>
+    <button pl-button class="expand-collapse-button" (click)="onExpandCollapseClick()">
+        <pl-icon [svg]="expandCollapseIcon()" [height]="12" [width]="12"></pl-icon>
+    </button>
+    <button pl-button class="close-button" (click)="onCloseClick()">
+        <pl-icon [svg]="'close-inverted'" [height]="22" [width]="22"></pl-icon>
+    </button>
+</div>
+<div [hidden]="!isExpanded()" class="body">
+    <ng-content></ng-content>
+</div>

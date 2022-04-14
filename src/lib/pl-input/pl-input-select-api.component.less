@@ -1,0 +1,29 @@
+@import '../core/flexbox.less';
+@import '../core/layout.less';
+@import '../core/spacing.less';
+@import '../core/components-defaults/pl-input.less';
+
+.pl-input-select-api {
+    &.focused {
+        .select-and-options {
+            z-index: 100;
+        }
+    }
+
+    .dropdown {
+        border-color: @pl-input-border-focus;
+        background-color: @pl-input-dropdown-background;
+    }
+
+    .option {
+        background-color: @pl-input-option-background;
+        border-bottom: solid 1px @pl-input-option-border;
+        .padding-lr;
+        .padding-tb;
+        cursor: pointer;
+
+        &:hover {
+            background-color: @pl-input-option-background-hover;
+        }
+    }
+}

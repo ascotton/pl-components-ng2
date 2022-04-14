@@ -1,0 +1,16 @@
+<div class="pl-carousel-scroller flexbox" (window:resize)="onResizeEle($event)">
+<!-- <div class="pl-carousel-scroller flexbox"> -->
+    <div *ngIf="showLeftArrow" class="arrow-prev-cont pointer" [ngStyle]="styles.arrowCont" (click)="scrollPrev()">
+        <div class="arrow-prev" [ngStyle]="styles.arrow">
+            <pl-icon class="white" [svg]="'chevron-left'"></pl-icon>
+        </div>
+    </div>
+    <div #carouselWrapper class="carousel-wrapper padding flex1">
+        <ng-content></ng-content>
+    </div>
+    <div *ngIf="showRightArrow" class="arrow-next-cont pointer" [ngStyle]="styles.arrowCont" (click)="scrollNext()">
+        <div class="arrow-next" [ngStyle]="styles.arrow">
+            <pl-icon class="white" [svg]="'chevron-right'"></pl-icon>
+        </div>
+    </div>
+</div>

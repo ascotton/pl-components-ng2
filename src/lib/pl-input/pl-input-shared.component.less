@@ -1,0 +1,131 @@
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-input.less';
+
+/*
+:host {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+*/
+//:host {
+.pl-input-checkbox-group, .pl-input-checkbox, .pl-input-datepicker, .pl-input-file, .pl-input-multi-select-api, .pl-input-multi-select, .pl-input-radio-group, .pl-input-radio, .pl-input-select-api, .pl-input-select, .pl-input-text, .pl-input-textarea, .pl-input-time {
+    color: @pl-input-color;
+}
+
+// Validation
+
+@color-required: @pl-input-validation-required;
+
+.input-disabled() {
+    cursor: not-allowed;
+    background-color: @pl-input-disabled-background;
+    color: @pl-input-validation-disabled-color;
+    border-color: @pl-input-validation-disabled-border;
+}
+.input-invalid() {
+    border-color: @pl-input-validation-invalid;
+}
+.input-valid() {
+    border-color: @pl-input-validation-valid;
+}
+.input-required() {
+    border-color: @color-required;
+}
+
+label.label {
+    font-weight: bold;
+}
+
+.disabled {
+    input, textarea, &.border,
+    &.pl-input-select .select-button,
+    &.pl-input-multi-select .select-button,
+    &.pl-input-radio input:checked + .icon-container,
+    &.pl-input-file .input-wrapper .input-dropzone, &.pl-input-file .input-wrapper .input,
+    &.pl-input-checkbox input,
+    &.pl-input-radio input  {
+        .input-disabled;
+    }
+}
+
+// Div is just to be more specific to take precedence over focus styles.
+//:host.ng-invalid.ng-dirty div {
+div .ng-invalid.ng-dirty, div.ng-invalid.ng-dirty {
+    &.border,
+    .input-prefix, .input-suffix, .icon-left, .icon-right,
+    &.pl-input-select .select-button, &.pl-input-select .select-button .label,
+    &.pl-input-select-api .border,
+    &.pl-input-multi-select .select-button, &.pl-input-multi-select .select-button .label,
+    &.pl-input-multi-select-api .border,
+    &.pl-input-file .input-wrapper .input-dropzone
+    {
+        .input-invalid;
+    }
+
+    &.border .input-prefix, &.border .input-suffix, &.border .icon-left, &.border .icon-right,
+    &.pl-input-select .select-button .icon,
+    &.pl-input-multi-select .select-button .icon
+    {
+        fill: @pl-input-validation-invalid;
+        color: @pl-input-validation-invalid;
+    }
+}
+//:host.ng-valid.ng-dirty div.notEmptyValue {
+div .ng-valid.ng-dirty.notEmptyValue, div.ng-valid.ng-dirty.notEmptyValue {
+    &.border,
+    .input-prefix, .input-suffix, .icon-left, .icon-right,
+    &.pl-input-select .select-button, &.pl-input-select .select-button .label,
+    &.pl-input-select-api .border,
+    &.pl-input-multi-select .select-button, &.pl-input-multi-select .select-button .label,
+    &.pl-input-multi-select-api .border,
+    &.pl-input-file .input-wrapper .input-dropzone
+    {
+        .input-valid;
+    }
+
+    &.border .input-prefix, &.border .input-suffix, &.border .icon-left, &.border .icon-right,
+    &.pl-input-select .select-button .icon,
+    &.pl-input-multi-select .select-button .icon
+    {
+        fill: @pl-input-validation-valid;
+        color: @pl-input-validation-valid;
+    }
+}
+.required {
+    &.border,
+    .input-prefix, .input-suffix, .icon-left, .icon-right,
+    &.pl-input-select .select-button, &.pl-input-select .select-button .label,
+    &.pl-input-select-api .border,
+    &.pl-input-multi-select .select-button, &.pl-input-multi-select .select-button .label,
+    &.pl-input-multi-select-api .border,
+    &.pl-input-file .input-wrapper .input-dropzone
+    {
+        .input-required;
+    }
+
+    &.border .input-prefix, &.border .input-suffix, &.border .icon-left, &.border .icon-right,
+    &.pl-input-select .select-button .icon,
+    &.pl-input-multi-select .select-button .icon
+    {
+        fill: @color-required;
+        color: @color-required;
+    }
+}
+
+.dropdown {
+    .options-messages {
+        .message {
+            font-style: italic;
+            .padding-lr;
+            .padding-tb;
+        }
+    }
+}
+
+// Removing clock icon from all chrome browsers time pickers
+input[type="time"]::-webkit-calendar-picker-indicator{
+    display:none;
+}

@@ -1,0 +1,7 @@
+<div #plModalContentWrapper class="pl-modal" [ngClass]="classesCont" (click)="clickBackground($event)" (keydown)="onKeyDown($event)">
+    <div class="pl-modal-center">
+        <div #plModalContent class="pl-modal-content" (click)="handleClick($event)">
+            <div #plModalPlaceholder></div>
+        </div>
+    </div>
+</div>

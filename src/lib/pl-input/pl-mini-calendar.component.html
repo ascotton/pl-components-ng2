@@ -1,0 +1,22 @@
+<div class="pl-mini-calendar">
+    <div class="nav" (keydown)="calendarKeyDown($event)" (focusout)="calendarFocusOut($event)">
+        <div class="next-previous">
+            <pl-icon class="previous" [svg]="'chevron-left'" [scale]="0.6" [verticalAlign]="'-1px'" (click)="navPreviousMonth()"></pl-icon>
+            <pl-icon class="next" [svg]="'chevron-right'" [scale]="0.6" [verticalAlign]="'-1px'" (click)="navNextMonth()"></pl-icon>
+        </div>
+        <pl-input-select class="month-select" [(model)]="viewMonth" [options]="monthOpts" [filter]="false"
+                        dropdownMaxHeight="200" (onChange)="navMonth()"></pl-input-select>
+        <pl-input-select class="year-select" [(model)]="viewYear" [options]="yearOpts" [filter]="false" [reverseOptionSort]="reverseYearSort" [scrollToOptionByValue]="scrollToYearByValue" [scrollToOptionByLabel]="scrollToYearByLabel" dropdownMaxHeight="200" (onChange)="navYear()"></pl-input-select>
+    </div>
+    <div class="weekdays-header flexbox">
+        <div *ngFor="let weekday of weekdaysHeader" class="weekday-header flex1">{{ weekday }}</div>
+    </div>
+    <div class="dates-table">
+        <div *ngFor="let row of daysTable; let rowIndex = index" class="dates-row flexbox">
+            <div *ngFor="let col of row; let colIndex = index" class="dates-column flex1 padding-tb" [ngClass]="col['classes']" (click)="clickDate(col['date'], rowIndex, colIndex)">
+                <span *ngIf="!col['disabled']">{{ col['day'] }}</span>
+                <span *ngIf="col['disabled']">&nbsp;</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="icon-overlay" [ngClass]="classes()"></div>
+<div class="meter-background">
+    <div class="meter" [ngClass]="classes()" [ngStyle]="meterStyles()"></div>
+</div>
+<progress *ngIf="isIndeterminate()" class="visually-hidden"></progress>
+<progress *ngIf="!isIndeterminate()" class="visually-hidden" [value]="value"></progress>

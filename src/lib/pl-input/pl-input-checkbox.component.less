@@ -1,0 +1,23 @@
+@import '../core/components-defaults/pl-input.less';
+
+.pl-input-checkbox {
+    .icon-container {
+        flex: 0 0 auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    &.noPadding {
+        .icon-container {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+    }
+    input:checked + .icon-container {
+        background-color: @pl-input-checkbox-background;
+        transition: all 75ms linear;
+        .icon {
+            transform: scale(1, 1);
+            transition: all 150ms ease-in-out 75ms;
+        }
+    }
+}

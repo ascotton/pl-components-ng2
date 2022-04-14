@@ -1,0 +1,203 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+.pl-table {
+    font-family: @pl-table-font-family;
+    font-size: @pl-table-font-size;
+
+    .header-row {
+        font-family: @pl-table-header-font-family;
+    }
+
+    .filters {
+        .select, .input {
+            display: inline-block;
+            vertical-align: top;
+            .margin-r;
+            min-width: 200px;
+            max-width: 300px;
+        }
+        .total, .clear-all-filters-btn, .show-filters-btn, .hide-filters-btn {
+            line-height: 30px;      // Match add filter select.
+        }
+        .clear-all-filters-btn {
+            color: @pl-table-clear-all-filters-no-filters-color;
+
+            &.hasFilter {
+                cursor: pointer;
+                color: @pl-table-clear-all-filters-has-filters-color;
+            }
+        }
+        .add-filter-btn {
+            color: @pl-table-clear-all-filters-no-filters-color;
+
+            &.canAdd {
+                cursor: pointer;
+                color: @pl-table-clear-all-filters-has-filters-color;
+            }
+        }
+        .show-filters-btn, .hide-filters-btn {
+            cursor: pointer;
+            color: @pl-table-clear-all-filters-has-filters-color;
+        }
+        .filter {
+            background: @pl-table-filter-background;
+            .padding-large-lr;
+            .padding-tb;
+            border-radius: 4px;
+
+            .filter-name {
+                line-height: 32px;
+            }
+            .remove-filter-btn {
+                cursor: pointer;
+                fill: @pl-table-filter-close-color;
+
+                &:hover {
+                    fill: @pl-table-filter-close-color-hover;
+                }
+            }
+        }
+    }
+
+    .body-rows {
+        font-size: @pl-table-font-size-body;
+    }
+    .body-row {
+        display: block;
+    }
+
+    .header-row.fixed {
+        // Show on top of footer for scrolling fixed header.
+        z-index: 990;
+    }
+    .footer {
+        .padding;
+        background-color: @pl-table-footer-background;
+    }
+
+    .pages {
+        text-align: center;
+
+        .page-arrow-prev, .page-arrow-next {
+            //cursor: pointer;
+            //.padding-lr;
+            //fill: @pl-table-page-arrow;
+            &[pl-button] {
+                margin: 0;
+                .margin-lr;
+                padding: 0 9px;
+            }
+        }
+        // .page-arrow-icon {
+        //     fill: @pl-table-page-arrow;
+        // }
+    }
+
+    &.cards {
+        .header-row-main {
+            display: none;
+        }
+        .body-rows {
+            text-align: center;
+        }
+        .body-row {
+            background-color: @pl-table-cards-background;
+            text-align: center;
+            border: solid 1px @pl-table-body-row-border;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: top;
+            .margin;
+            .padding;
+        }
+    }
+
+    &.table {
+        .header-column {
+            text-transform: capitalize;
+            background-color: @pl-table-header-background;
+
+            &.orderable {
+                cursor: pointer;
+
+                &:hover {
+                    background-color: @pl-table-header-hover;
+                }
+
+                .col-arrow {
+                    fill: @pl-table-column-arrow;
+                }
+            }
+            &.sorted {
+                background-color: @pl-table-header-sorted;
+            }
+        }
+        .body-row {
+            background-color: @pl-table-body-row-background;
+            min-height: 42px;
+            border-bottom: solid 1px @pl-table-body-row-border;
+
+            &:nth-child(even) {
+                background-color: @pl-table-body-row-even;
+            }
+
+            &.click {
+                cursor: pointer;
+            }
+
+            &:hover {
+                background-color: @pl-table-body-row-hover;
+                .body-column:not(:first-child) {
+                    border-left: solid 1px @pl-table-body-row-hover;
+                }
+            }
+        }
+        .header-row-main, .body-row-main {
+            .flexbox;
+        }
+        .header-column, .body-column {
+            flex: 1 0 0;
+            overflow: hidden;
+
+            &:not(:first-child) {
+                border-left: solid 1px @pl-table-column-border;
+            }
+        }
+
+        .header-column-content, .body-column {
+            .padding;
+        }
+
+        .body-column {
+            &.click {
+                cursor: pointer;
+            }
+
+            .body-column-cell {
+                overflow-wrap: break-word;
+            }
+        }
+
+        .current-page-input {
+            display: inline-block;
+            width: 65px;
+            vertical-align: 4px;
+            text-align: center;
+        }
+        .footer-total, .footer-items-per-page {
+            line-height: 32px;      // Match input.
+            .items-per-page-label {
+                line-height: 30px;      // Match add filter select.
+            }
+        }
+
+        .no-data {
+            .padding-large;
+            background-color: @pl-table-no-data-background;
+            text-align: center;
+        }
+    }
+}

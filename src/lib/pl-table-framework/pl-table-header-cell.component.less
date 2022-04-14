@@ -1,0 +1,39 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+:host {
+    background-color: @pl-table-header-background;
+    flex: 1 0 0;
+    overflow: hidden;
+
+    &:not(:first-child) {
+        border-left: solid 1px @pl-table-column-border;
+      }
+    }
+
+.pl-table-header-cell {
+    .padding;
+
+    text-transform: capitalize;
+
+    &.orderable {
+        cursor: pointer;
+
+        &:hover {
+            background-color: @pl-table-header-hover;
+        }
+
+        .col-arrow {
+            fill: @pl-table-column-arrow;
+
+            &.placeholder {
+                fill: @pl-table-column-arrow-placeholder;
+            }
+        }
+    }
+    &.sorted {
+        background-color: @pl-table-header-sorted;
+    }
+}

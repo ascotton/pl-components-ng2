@@ -1,0 +1,55 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+@import '../core/colors.less';
+@import '../core/colors-classes.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+.filters-top-groups {
+    .top-bar {
+        .total, .sort {
+            vertical-align: -10px;
+        }
+    }
+
+    .filters-primary, .filters-secondary {
+        width: 100%;
+        .margin-large-b;
+        .padding-large-lr;
+        box-sizing: border-box;
+    }
+
+    .filter-primary, .filter-secondary {
+        .flex1;
+    }
+
+    .filters-btn {
+        margin: 0;
+        // Prevent width changing due to text length differences.
+        width: 135px;
+
+        &[pl-button] {
+            .gray-darker;
+            background-color: @white;
+
+            &:hover {
+                .blue-medium;
+            }
+
+            &.secondaryVisible {
+                .white;
+                border-color: @blue-medium;
+                background-color: @blue-medium;
+
+                pl-icon {
+                    .white;
+                }
+            }
+        }
+    }
+
+    .clear-btn {
+        height: 25px;
+        margin-top: 24px;
+    }
+}

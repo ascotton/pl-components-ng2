@@ -1,0 +1,25 @@
+<div #inputMultiSelect class="pl-input-multi-select" tabindex="0" [ngClass]="classesContainer" (keydown)="keyDown($event);" (focusout)="onFocusout()">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="select-and-options border relative">
+        <div #selectButton class="select-button flexbox" (click)="clickButton()">
+            <div class="flex1 label" [ngClass]="{'placeholder':model==''}">{{ currentLabel }}</div>
+            <pl-icon class="icon" [svg]="'chevron-down'" [scale]="0.6" [verticalAlign]="'-6px'"></pl-icon>
+        </div>
+        <pl-input-dropdown class="dropdown" [hidden]="!focused" [containerSelector]="dropdownContainerSelector" (onBlur)="onBlurDropdown($event)">
+            <div class="options-container">
+                <div *ngIf="useFilter" class="filter padding sticky overlay">
+                    <pl-input-text class="search-filter" [(model)]="filterModel" [iconLeft]="'magnifier'" [clearButton]="true" [placeholder]="filterPlaceholder" [focused]="focused" [onPreviewKeyDown]="onSearchInputPreviewKeyDown" (onChange)="onChangeFilter($event)"></pl-input-text>
+                </div>
+                <div class="options">
+                    <div *ngFor="let option of selectedOptions" class="option">
+                        <pl-input-checkbox [(model)]="option.selected" [label]="option.label" [clickableAreaExpanded]="true" (onChange)="toggleOption(option)"></pl-input-checkbox>
+                    </div>
+                    <div *ngFor="let option of filteredOptions" class="option">
+                        <pl-input-checkbox [(model)]="option.selected" [label]="option.label" [clickableAreaExpanded]="true" (onChange)="toggleOption(option)"></pl-input-checkbox>
+                    </div>
+                </div>
+            </div>
+        </pl-input-dropdown>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

@@ -1,0 +1,28 @@
+@import '../core/colors.less';
+@import '../core/typography.less';
+.closable-page-header {
+    padding: 8px 0px 8px 24px;
+    height: 24px;
+    margin-bottom: 24px;
+    background-color: @slate-darkest;
+    font-size: 20px;
+    font-family: @roboto;
+    color: @white;
+    vertical-align: middle;
+
+    .close-button {
+        font-size: 14px;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 25px;
+        vertical-align: middle;
+        float: right;
+        color: @white;
+        pl-icon {
+            fill: @white;
+        }
+        span {
+            display: inline;
+        }
+    }
+}

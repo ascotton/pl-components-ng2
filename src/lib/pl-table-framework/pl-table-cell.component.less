@@ -1,0 +1,19 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+:host {
+    flex: 1 0 0;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    .padding;
+
+    &:not(:first-child) {
+        border-left: solid 1px @pl-table-column-border;
+    }
+
+    &[expandable] {
+        padding: 0;
+    }
+}

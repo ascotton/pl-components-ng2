@@ -1,0 +1,9 @@
+<div class="pl-steps-buttons">
+    <button type="button" pl-button [disabled]="currentStep.prevDisabled" class="gray-outline x-qa-steps-buttons-back" (click)="prevStep()">
+        <pl-icon class="gray-darkest" [svg]="'chevron-left'" [scale]="0.6" [verticalAlign]="'-1px'"></pl-icon> Back
+    </button>
+    <button type="button" pl-button class="primary x-qa-steps-buttons-next" [disabled]="currentStep.nextDisabled" (click)="nextStep()">
+        {{ currentNextText }} <pl-icon class="white" [svg]="'chevron-right'" [scale]="0.6" [verticalAlign]="'-1px'"></pl-icon>
+    </button>
+    <button type="button" pl-button class="bare x-qa-steps-buttons-cancel" (click)="cancel()">Cancel</button>
+</div>

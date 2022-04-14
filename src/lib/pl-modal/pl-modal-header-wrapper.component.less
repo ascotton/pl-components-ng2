@@ -1,0 +1,32 @@
+@import '../core/colors.less';
+@import '../core/spacing.less';
+@import '../core/typography.less';
+
+.modal-header {
+    background-color: @slate-darkest;
+    color: @white;
+    .padding-nl-tb;
+    .padding-large-lr;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: solid 1px @gray-darker;
+    border-bottom: 0;
+    display: flex;
+    .header-text {
+        font-family: @headings-font-family;
+        .font-h5;
+        .bold;
+    }
+    .close-icon {
+        cursor: pointer;
+        fill: @white;
+        margin-left: auto;
+    }
+}
+.modal-body {
+    .padding-xlarge;
+    background-color: @white;
+    border: solid 1px @gray-darker;
+    border-bottom: 0;
+    border-top: 0;
+}

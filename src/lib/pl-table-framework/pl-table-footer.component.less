@@ -1,0 +1,49 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+.pl-table-footer {
+    font-family: @pl-table-font-family;
+    font-size: @pl-table-font-size;
+
+    &.sticky-footer {
+        bottom: 0;
+        position: sticky; 
+    }
+
+    .padding;
+    background-color: @pl-table-footer-background;
+
+    .pages {
+        text-align: center;
+
+        .page-arrow-prev, .page-arrow-next {
+            //cursor: pointer;
+            //.padding-lr;
+            //fill: @pl-table-page-arrow;
+            &[pl-button] {
+                margin: 0;
+                .margin-lr;
+                padding: 0 9px;
+            }
+        }
+        // .page-arrow-icon {
+        //     fill: @pl-table-page-arrow;
+        // }
+    }
+
+    .current-page-input {
+        display: inline-block;
+        width: 65px;
+        vertical-align: 4px;
+        text-align: center;
+    }
+
+    .footer-total, .footer-items-per-page {
+        line-height: 32px;      // Match input.
+        .items-per-page-label {
+            line-height: 30px;      // Match add filter select.
+        }
+    }
+}

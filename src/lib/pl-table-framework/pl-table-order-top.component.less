@@ -1,0 +1,31 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+@import '../core/colors.less';
+@import '../core/colors-classes.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+.order-top {
+    .top-bar {
+        .flexbox;
+        .padding-large-lr;
+        box-sizing: border-box;
+
+        .item {
+            .flex1;
+        }
+
+        .total {
+        }
+        .sort {
+            text-align: right;
+
+            .sort-input {
+                text-align: left;
+                min-width: 125px;
+                max-width: 200px;
+                margin-top: -5px;
+            }
+        }
+    }
+}

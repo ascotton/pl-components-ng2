@@ -1,0 +1,36 @@
+<div class="pl-input-time-double" [ngClass]="classesContainer">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="select-and-options relative">
+        <div #input class="select-button">
+            <pl-input-text [(model)]="modelInput" [type]="'time'" [placeholder]="placeholder" [disabled]="disabled"
+                [iconRight]="'chevron-down'" (onChange)="onChangeInput($event)" (onBlur)="onBlurInput($event)"
+                (input)="inputEvent($event)" (click)="toggleOptionsDropDown($event)">
+            </pl-input-text>
+        </div>
+        <pl-input-dropdown class="dropdown" [hidden]="!showOptions || !hasOptionsOpened"
+            [containerSelector]="dropdownContainerSelector" (onBlur)="onBlurDropdown($event)">
+            <div #dropdown class="options-container flexbox">
+                <div class="options options-hour">
+                    <div *ngFor="let option of timeOptionsHours" class="option option-hr"
+                        [class.option-selected]="hourToHighLight === option.label" (click)="onSelectTime(option, 'HH')">
+                        {{ option.label }} </div>
+                </div>
+
+                <div class="options options-min">
+                    <div *ngFor="let option of timeOptionsMinutes" class="option option-min"
+                        [class.option-selected]="minuteToHighLight === option.label"
+                        (click)="onSelectTime(option, 'mm')">{{ option.label }}</div>
+                </div>
+
+                <div class="options options-meridiem">
+                    <div class="option option-meridiem" [class.option-selected]="meridiemToHighLight === 'AM'"
+                        (click)="onSelectMeridiem('AM')"> AM </div>
+                    <div class="option option-meridiem" [class.option-selected]="meridiemToHighLight === 'PM'"
+                        (click)="onSelectMeridiem('PM')"> PM </div>
+                </div>
+            </div>
+        </pl-input-dropdown>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages">
+    </pl-input-errors>
+</div>

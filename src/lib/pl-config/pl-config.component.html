@@ -1,0 +1,10 @@
+<div class="pl-config">
+    <form [formGroup]="configForm">
+        <div *ngFor="let url of appUrls">
+            <pl-input-text class="form-input" [formCtrl]="configForm" [label]="url.label" [(model)]="url.value"></pl-input-text>
+        </div>
+
+        <button pl-button type="submit" [disabled]="!configForm.valid" (click)="submit()">Submit</button>
+    </form>
+    <button pl-button class="danger" (click)="clearLocalStorage()">Reset (clear local storage)</button>
+</div>

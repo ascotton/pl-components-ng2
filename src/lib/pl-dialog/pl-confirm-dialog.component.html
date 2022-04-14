@@ -1,0 +1,21 @@
+<div #plConfirmDialogContentWrapper class="pl-dialog-background" *ngIf="showDialog" (keydown)="onKeyDown($event)" tabindex="-1">
+    <div class="pl-dialog" [ngClass]="data.classesDialog">
+        <div class="pl-dialog-alert">
+            <div *ngIf="data.type === 'toast'" class="left-icon padding-lr">
+                <pl-icon class="left-icon-svg" [svg]="leftIconSvg" [scale]="0.7" [verticalAlign]="'-2px'"></pl-icon>
+            </div>
+            <div class="content">
+                <div class="dialog-header">
+                    <span class="header-text">{{data.header}}</span>
+                    <pl-icon (click)="clickClose()" class="close-icon" [svg]="'close-inverted'"></pl-icon>
+                </div>
+                <div class="dialog-body" [innerHTML]="data.content | safeHtml">
+                </div>
+                <div class="dialog-buttons">
+                    <button pl-button class="x-qa-dialog-primary-button" [ngClass]="data.primaryClasses" (click)="clickPrimary($event)">{{data.primaryLabel}}</button>
+                    <button pl-button class="x-qa-dialog-secondary-button" *ngIf="data.secondaryLabel" [ngClass]="data.secondaryClasses" (click)="clickSecondary($event)">{{data.secondaryLabel}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

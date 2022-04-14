@@ -1,0 +1,42 @@
+@import '../colors.less';
+
+@pl-table-header-font-family: "Roboto";
+@pl-table-font-family: "Open Sans";
+@pl-table-font-size: 14px;
+@pl-table-font-size-body: 14px;
+
+@pl-table-header-background: @slate-lighter;
+@pl-table-header-hover: @slate-light;
+@pl-table-header-sorted: @slate-light;
+
+@pl-table-footer-background: @slate-lighter;
+
+@pl-table-filter-background: @slate-lighter;
+@pl-table-filter-close-color: @gray-darkest;
+@pl-table-filter-close-color-hover: @blue-medium;
+
+@pl-table-cards-background: @gray-lightest;
+@pl-table-cards-border: @gray-lighter;
+
+@pl-table-column-arrow: @gray-darkest;
+@pl-table-column-arrow-placeholder: @gray;
+@pl-table-page-arrow: @gray-darkest;
+
+@pl-table-body-row-background: @white;
+@pl-table-body-row-border: @gray-lighter;
+@pl-table-body-row-even: lighten(@gray-lightest, 5%);
+//@pl-table-body-row-even: @white;
+@pl-table-body-row-hover: @blue-lightest;
+
+@pl-table-column-border: @white;
+
+@pl-table-no-data-background: @slate-lighter;
+
+@pl-table-clear-all-filters-no-filters-color: @gray;
+@pl-table-clear-all-filters-has-filters-color: @blue-medium;
+
+/**
+// Overrides - must be last.
+// TODO does not work with AOT; add '@' back in front of import as AOT ignores comments..?
+// import (optional) '../../../components-config/pl-table.less';
+*/

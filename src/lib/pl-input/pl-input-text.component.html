@@ -1,0 +1,23 @@
+<div>
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+    <div class="pl-input-text border" [ngClass]="classesContainer">
+        <div class="icon-left margin-small-l" *ngIf="iconLeft">
+            <pl-icon [svg]="iconLeft"></pl-icon>
+        </div>
+        <div #prefix class="input-prefix">
+            <ng-content select="[pl-prefix]"></ng-content>
+        </div>
+        <input *ngIf="formCtrl" #input [ngStyle]="stylesInput" [(ngModel)]="model" [type]="type" [name]="name" [formControl]="formCtrl.controls[name]" (focus)="focus($event)" (blur)="blur($event)" (keydown)="onKeyDown($event)" (keyup)="change($event)" (input)="inputEvent($event)" [placeholder]="placeholder" [autocomplete]="autocomplete" [required]="required" [min]="min" [max]="max" [minlength]="minlength" [maxlength]="maxlength" [pattern]="pattern" />
+
+        <!-- Same as above but without formControl and WITH disabled -->
+        <input *ngIf="!formCtrl" #input [ngStyle]="stylesInput" [(ngModel)]="model" [type]="type" [name]="name" [disabled]="disabled" (focus)="focus($event)" (blur)="blur($event)" (keydown)="onKeyDown($event)" (keyup)="change($event)" (input)="inputEvent($event)" [placeholder]="placeholder" [autocomplete]="autocomplete" [required]="required" [min]="min" [max]="max" [minlength]="minlength" [maxlength]="maxlength" [pattern]="pattern" />
+
+        <div class="input-suffix">
+            <ng-content select="[pl-suffix]"></ng-content>
+        </div>
+        <div class="icon-right margin-small-r" [ngClass]="classesIconRight" *ngIf="iconRight">
+            <pl-icon [svg]="iconRight" (click)="clickIconRight($event)"></pl-icon>
+        </div>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [hidden]="focused" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages" [minlength]="minlength" [maxlength]="maxlength" [min]="min" [max]="max"></pl-input-errors>
+</div>

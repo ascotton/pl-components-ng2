@@ -1,0 +1,55 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+.filters {
+    .select, .input {
+        display: inline-block;
+        vertical-align: top;
+        .margin-r;
+        min-width: 200px;
+        max-width: 300px;
+    }
+    .total, .clear-all-filters-btn, .show-filters-btn, .hide-filters-btn {
+        line-height: 30px;      // Match add filter select.
+    }
+    .clear-all-filters-btn {
+        color: @pl-table-clear-all-filters-no-filters-color;
+
+        &.hasFilter {
+            cursor: pointer;
+            color: @pl-table-clear-all-filters-has-filters-color;
+        }
+    }
+    .add-filter-btn {
+        color: @pl-table-clear-all-filters-no-filters-color;
+
+        &.canAdd {
+            cursor: pointer;
+            color: @pl-table-clear-all-filters-has-filters-color;
+        }
+    }
+    .show-filters-btn, .hide-filters-btn {
+        cursor: pointer;
+        color: @pl-table-clear-all-filters-has-filters-color;
+    }
+    .filter {
+        background: @pl-table-filter-background;
+        .padding-large-lr;
+        .padding-tb;
+        border-radius: 4px;
+
+        .filter-name {
+            line-height: 32px;
+        }
+        .remove-filter-btn {
+            cursor: pointer;
+            fill: @pl-table-filter-close-color;
+
+            &:hover {
+                fill: @pl-table-filter-close-color-hover;
+            }
+        }
+    }
+}

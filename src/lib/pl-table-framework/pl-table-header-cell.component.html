@@ -1,0 +1,7 @@
+<div class="pl-table-header-cell flexbox" [ngClass]="classes" (click)="order()">
+    <div class="col-title margin-r"><ng-content></ng-content></div>
+    <pl-icon class="col-arrow" *ngIf="orderDirection === 'ascending'" [svg]="'chevron-up'" [scale]="0.6" [verticalAlign]="'-4px'"></pl-icon>
+    <pl-icon class="col-arrow" *ngIf="orderDirection === 'descending'" [svg]="'chevron-down'" [scale]="0.6" [verticalAlign]="'-4px'"></pl-icon>
+    <!-- Faded sort indicator if not sorted yet but a sortable column -->
+    <pl-icon class="col-arrow" *ngIf="orderKey && (orderDirection !== 'descending' && orderDirection !== 'ascending')" [svg]="'chevron-up-down'" [scale]="0.7" [verticalAlign]="'-4px'"></pl-icon>
+</div>

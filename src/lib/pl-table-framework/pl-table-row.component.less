@@ -1,0 +1,59 @@
+@import '../core/colors.less';
+@import '../core/decoration.less';
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-table.less';
+
+:host {
+    background-color: @pl-table-body-row-background;
+    display: block;
+    width: 100%;
+
+    &:nth-child(even) {
+        background-color: @pl-table-body-row-even;
+    }
+
+    &:first-of-type {
+        .cell-wrapper {
+            border-top-width: 0;
+        }
+    }
+
+    &:last-of-type {
+        .cell-wrapper {
+            border-bottom: solid 1px @pl-table-body-row-border;
+        }
+    }
+
+    .cell-wrapper {
+        display: flex;
+        border-top: solid 1px @pl-table-body-row-border;
+        border-right: solid 1px transparent;
+        border-left: solid 1px transparent;
+        min-height: 42px;
+
+        &:hover {
+            background-color: @pl-table-body-row-hover;
+        }
+
+        &.expanded {
+            border-bottom: solid 1px @pl-table-body-row-border;
+            border-left-color: @pl-table-body-row-border;
+            border-right-color: @pl-table-body-row-border;
+        }
+    }
+
+    .cell-wrapper-expansion {
+        overflow-y: hidden;
+
+        &.expanded {
+            border: solid 1px @pl-table-body-row-border;
+            border-top-width: 0;
+            box-shadow: @box-shadow-bottom;
+            overflow-y: visible;
+
+            .margin-b;
+        }
+    }
+}

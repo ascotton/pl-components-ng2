@@ -1,0 +1,18 @@
+<div class="pl-tabs">
+    <pl-link *ngFor="let tab of tabs"
+        class="link-unstyled link-no-color inline-block pl-tab"
+        routerLinkActive="{{ (tab.hrefAbsolute && tab.hrefAbsolute.length) ? '' : 'active' }}"
+        tabindex="-1"
+        [classesLink]="tab.classesLink"
+        [emitEvent]="updatePageTabTitleBasedOnActiveLink"
+        [href]="tab.href"
+        [hrefAbsolute]="tab.hrefAbsolute"
+        [label]="tab.label"
+        [ngClass]="tab.classes"
+        [queryParams]="tab.hrefQueryParams"
+        [routerLink]="tab.href"
+        [replaceHistory]="tab.replaceHistory"
+        (plLinkEvent)="plLinkEvent($event)">
+        {{ tab.label }}
+    </pl-link>
+</div>

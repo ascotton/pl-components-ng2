@@ -1,0 +1,53 @@
+<div [hidden]="!filtersVisible" class="filters margin-large-r">
+    <div class="header flexbox padding-tb padding-large-lr">
+        <div class="flex1">
+            <pl-icon [svg]="'filter'" [scale]="0.7" [verticalAlign]="'-2px'" class="white margin-small-r"></pl-icon>
+            <b>Filters</b>
+        </div>
+        <pl-icon *ngIf="canCloseFilters" [svg]="'close-inverted'" class="white pointer x-qa-filter-x" (click)="closeFilters()"></pl-icon>
+    </div>
+    <div class="padding-large padding-t">
+        <div class="margin-b">
+            <button pl-button class="link x-qa-clear-all-filters" (click)="clearAllFilters()">{{ clearFiltersButtonLabel() }}</button>
+        </div>
+        <form>
+            <div *ngFor="let filter of filters; let index = index;" class="filter margin-b">
+                <div class="filter-name margin-r"><b>{{ filter.label }}</b></div>
+                <div class="input" *ngIf="filter.type === 'text'">
+                    <pl-input-text [(model)]="filter.text" [clearButton]="true" (onChange)="filterKeyup($event)" [placeholder]="'Type to filter..'" [debounceChange]="'1000'"></pl-input-text>
+                </div>
+                <div class="input" *ngIf="filter.type === 'select'">
+                    <pl-input-select [(model)]="filter.text" [options]="filter.selectOpts" [filter]="true" (onChange)="onFilter($event)" [emptyOption]="true"></pl-input-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'selectBigFilter'">
+                    <pl-input-select
+                        [(model)]="filter.text"
+                        [options]="filter.selectOptsBigFilter"
+                        [filter]="true"
+                        [bigFilter]="true"
+                        [bigFilterDisplayLimit]="1000"
+                        [lunrNoStemming]="true"
+                        [lunrStartsWithMatch]="true"
+                        [emptyOption]="true"
+                        (onChange)="onFilter($event)"
+                    ></pl-input-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'selectApi'">
+                    <pl-input-select-api [(model)]="filter.text" [options]="filter.selectOptsApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true"></pl-input-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelect'">
+                    <pl-input-multi-select [(model)]="filter.textArray" [options]="filter.selectOptsMulti" [filter]="true" (onChange)="onFilter($event)"></pl-input-multi-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelectApi'">
+                    <pl-input-multi-select-api [(model)]="filter.textArray" [options]="filter.selectOptsMultiApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true" [resultsLimitedText]="filter.optionsLimitedText" [resultsTotalCount]="filter.selectOptsMultiApiTotalCount"></pl-input-multi-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'checkbox'">
+                    <pl-input-checkbox-group [(model)]="filter.textArray" [options]="filter.selectOptsCheckbox" (onChange)="onFilter($event)" [horizontal]="true" [optionWidth]="(filter.optionWidth || 'auto')"></pl-input-checkbox-group>
+                </div>
+                <div class="input" *ngIf="filter.type === 'datepicker'">
+                    <pl-input-datepicker  [(model)]="filter.text"  (onChange)="onFilter($event)"></pl-input-datepicker>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

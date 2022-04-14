@@ -1,0 +1,10 @@
+<div class="order-top">
+    <div class="top-bar">
+        <!-- <div class="item font-h1">{{ title }}</div> -->
+        <div class="item total">Total: <b>{{ total | commify }}</b></div>
+        <div class="item sort">
+            <div class="inline-block sort-label">Sort: </div>
+            <pl-input-select class="inline-block sort-input" [(model)]="orderValue" [options]="orderOptions" [filter]="false" (onChange)="order($event)" [styleInline]="true"></pl-input-select>
+        </div>
+    </div>
+</div>

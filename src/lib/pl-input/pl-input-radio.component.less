@@ -1,0 +1,30 @@
+@import '../core/components-defaults/pl-input.less';
+
+.pl-input-radio {
+    display: inline-flex;
+
+    .icon-container {
+        border-radius: 10px;
+        flex: 0 0 auto;
+
+        .dot {
+            position: absolute;
+            display: block;
+            width: 10px;
+            height: 10px;
+            top: 5px;
+            left: 5px;
+            border-radius: 4px;
+            background-color: @pl-input-radio-dot;
+            transform: scale(0, 0);
+            transition: transform 150ms ease-in-out;
+        }
+    }
+
+    input:checked + .icon-container {
+        background-color: @pl-input-radio-background;
+        .dot {
+            transform: scale(1, 1);
+        }
+    }
+}

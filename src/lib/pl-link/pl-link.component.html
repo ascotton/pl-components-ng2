@@ -1,0 +1,29 @@
+<div class="pl-link">
+    <ng-container *ngIf="hrefAbsolute">
+        <a [href]="hrefAbsolute" class="link" [ngClass]="classesLink" [ngStyle]="stylesLink" [attr.data-label]="label">
+            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        </a>
+    </ng-container>
+    <ng-container *ngIf="!hrefAbsolute">
+        <a
+            *ngIf="!replaceHistory"
+            class="link"
+            [ngClass]="classesLink"
+            [ngStyle]="stylesLink"
+            [routerLink]="href"
+            [queryParams]="queryParams"
+            routerLinkActive="active"
+            [attr.fragment]="fragment"
+            [attr.data-label]="label"
+        >
+            <!-- Hack workaround as two ng-content are not supported: http://stackoverflow.com/a/41727533 -->
+            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        </a>
+        <span *ngIf="replaceHistory" class="link" [ngClass]="classesLink" [ngStyle]="stylesLink" (click)="onClick()" [attr.data-label]="label">
+            <!-- Hack workaround as two ng-content are not supported: http://stackoverflow.com/a/41727533 -->
+            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        </span>
+    </ng-container>
+</div>
+
+<ng-template #contentTpl><ng-content></ng-content></ng-template>

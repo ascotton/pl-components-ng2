@@ -1,0 +1,11 @@
+<div>
+    <div class="pl-input-checkbox-group" [ngClass]="classesContainer">
+        <pl-input-label [label]="label" [required]="required"></pl-input-label>
+        <div class="options" [ngClass]="classesCols">
+            <div *ngFor="let opt of opts" class="option" [ngStyle]="stylesOption">
+                <pl-input-checkbox [(model)]="opt.selected" [label]="opt.label" (change)="changeOpt(opt)" [disabled]="disabled"></pl-input-checkbox>
+            </div>
+        </div>
+    </div>
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

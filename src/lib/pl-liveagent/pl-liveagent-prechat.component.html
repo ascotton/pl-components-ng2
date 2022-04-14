@@ -1,0 +1,56 @@
+<div class="pl-liveagent-prechat">
+    <div [hidden]="formAction" class="center">
+        Loading prechat, no endpoint found yet..
+    </div>
+    <form [hidden]="!formAction" id="{{ formId }}" method="post" action="{{ formAction }}">
+        <div>
+            <input type="hidden" name="liveagent.prechat:contactFirstName" value="{{ firstName }}" />
+            <div class="firstName" *ngIf="!hiddenFields.firstName">
+                <pl-input-text class="form-input" [label]="'First Name'" [(model)]="firstName" [required]="true"></pl-input-text>
+                <!-- First Name: <input type="text" name="liveagent.prechat:contactFirstName" value="{{ firstName }}" /> -->
+            </div>
+            <input type="hidden" name="liveagent.prechat:contactLastName" value="{{ lastName }}" />
+            <div *ngIf="!hiddenFields.lastName">
+                <pl-input-text class="form-input" [label]="'Last Name'" [(model)]="lastName" [required]="true"></pl-input-text>
+                <!-- Last Name: <input type="text" name="liveagent.prechat:contactLastName" value="{{ lastName }}" /> -->
+            </div>
+        </div>
+        <input type="hidden" name="liveagent.prechat:contactEmail" value="{{ email }}" />
+        <div *ngIf="!hiddenFields.email">
+            <pl-input-text class="form-input" [label]="'Email'" [(model)]="email" [required]="true"></pl-input-text>
+            <!-- Email: <input type="email" name="liveagent.prechat:contactEmail" value="{{ email }}" /> -->
+        </div>
+
+        <input type="hidden" name="liveagent.prechat:caseSubject" />
+        <pl-input-textarea class="form-input" [label]="'How can we help?'" [(model)]="issue" [required]="true"></pl-input-textarea>
+        <!-- <textarea type="text" name="liveagent.prechat:caseSubject" rows="3" maxlength="255" placeholder="How can we help?" required></textarea>
+         -->
+
+        <input type="hidden" name="liveagent.prechat.findorcreate.map:Contact" value="FirstName,contactFirstName;LastName,contactLastName;Email,contactEmail;" />
+
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Contact" value="Email,true;" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.isExactMatch:Contact" value="Email,true;" />
+        <!-- If the Contact is not found, then create one with the following fields set -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Contact" value="FirstName,true;LastName,true;Email,true;" />
+        <!-- Save the Contact on the Live Chat Transcript's Contact Lookup -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Contact" value="Contact" />
+        <!-- Show the Contact when it is found or created -->
+        <!--
+            <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Contact" value="true" />
+        -->
+        <!-- Create a Case every time -->
+        <input type="hidden" name="liveagent.prechat:caseOrigin" value="Chat" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map:Case" value="Origin,caseOrigin;Subject,caseSubject;" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Case" value="Origin,true;Subject,true;" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Case" value="Case" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Case" value="true" />
+        <!-- Link the Contact to the Case -->
+        <input type= "hidden" name="liveagent.prechat.findorcreate.linkToEntity:Contact" value="Case,ContactId" />
+
+        <div>
+            <!-- <input type="submit" value="Start Chat" /> -->
+            <!-- <button pl-button type="submit">Start Chat</button> -->
+            <button pl-button (click)="preSubmitForm()">Start Chat</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,43 @@
+@import '../core/flexbox.less';
+@import '../core/layout.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-input.less';
+
+.pl-input-time-double {
+    .dropdown {
+        z-index: 100;
+        background-color: @pl-input-dropdown-background;
+    }
+
+    .options {
+        width: 42px;
+        margin: 3px;
+        overflow-y: auto;
+        max-height: 200px;
+        overflow-x: hidden;
+        .center;
+
+        /* Hide Scrollbar */
+        -ms-overflow-style: none;  /* in IE and Edge */
+        scrollbar-width: none;  /* in Firefox */
+        &::-webkit-scrollbar {
+            display: none; /* in Chrome*/
+        }
+    }
+
+    .option {
+        background-color: @pl-input-option-background;
+        .padding-lr;
+        .padding-tb;
+        cursor: pointer;
+
+        &:hover {
+            background-color: @pl-input-option-background-hover !important;
+        }
+
+        &-selected {
+            background-color: @pl-input-option-selected-background !important;
+        }
+    }
+}

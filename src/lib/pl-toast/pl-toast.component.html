@@ -1,0 +1,18 @@
+<div class="pl-toast" (window:resize)="onResizeEle($event)" [ngClass]="classes.container" [ngStyle]="stylesContainer">
+    <div class="alert">
+        <div class="alert-content">
+            <div class="left-icon padding-lr">
+                <pl-icon class="left-icon-svg" [svg]="leftIconSvg" [scale]="0.7" [verticalAlign]="'-2px'"></pl-icon>
+            </div>
+            <div class="content">
+                <div *ngIf="closeOnTop" class="close-icon-top">
+                    <pl-icon (click)="fullHide()" class="close-icon inline-block" [svg]="'close-inverted'" [scale]="1"></pl-icon>
+                </div>
+                <div class="message">
+                    <div class="text">{{ message }}</div>
+                    <pl-icon *ngIf="!closeOnTop" (click)="fullHide()" class="close-icon" [svg]="'cross'" [scale]="0.8" [verticalAlign]="'-6px'"></pl-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

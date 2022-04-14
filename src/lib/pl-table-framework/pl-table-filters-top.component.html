@@ -1,0 +1,43 @@
+<div *ngIf="filterSelectOpts && filterSelectOpts.length" class="filters margin-b">
+    <div *ngIf="showClearAllFiltersBar" class="margin-small-b">
+        <div>
+            <div class="inline-block margin-r total">{{ totalLabel }}: <b>{{ total | commify }}</b></div>
+            <ng-container *ngIf="!filtersFixed">
+                <div *ngIf="filtersVisible" class="inline-block margin-r hide-filters-btn" (click)="toggleFiltersVisible()">Hide Filters</div>
+                <div *ngIf="!filtersVisible" class="inline-block margin-r show-filters-btn" (click)="toggleFiltersVisible()">Show Filters</div>
+            </ng-container>
+            <ng-container *ngIf="filtersVisible">
+                <ng-container *ngIf="!filtersFixed">
+                    <pl-input-select class="inline-block add-filter-btn" [ngClass]="classesAddFilter" [(model)]="addFilterValue" [options]="addFilterSelectOpts" [placeholder]="'Add Filter'" [styleInline]="true" [placeholderColor]="'inherit'" [dropdownMinWidth]="150" (onChange)="addFilterOptChange()"></pl-input-select>
+                </ng-container>
+                <div class="inline-block clear-all-filters-btn margin-r" [ngClass]="classesClearFilters" (click)="clearAllFilters()">{{ clearFiltersButtonLabel() }}</div>
+            </ng-container>
+        </div>
+    </div>
+    <div [hidden]="!filtersVisible" class="x-qa-active-filters">
+        <div *ngFor="let filter of visibleFilters(); let index = index;" class="inline-block">
+            <div class="filter margin-r margin-b {{filter.class || ''}}">
+                <div class="inline-block filter-name margin-r"><b>{{ filter.label }}</b></div>
+                <div class="input" *ngIf="filter.type === 'text'">
+                    <pl-input-text [(model)]="filter.text" [clearButton]="true" (onChange)="filterKeyup($event)" [placeholder]="(filter.placeholder || '')" [debounceChange]="'500'" [iconLeft]="'magnifier'"></pl-input-text>
+                </div>
+                <div class="input" *ngIf="filter.type === 'select'">
+                    <pl-input-select [(model)]="filter.text" [options]="filter.selectOpts" (onChange)="onFilter($event)" [placeholder]="(filter.placeholder || '&nbsp;')" [emptyOption]="true"></pl-input-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'selectApi'">
+                    <pl-input-select-api [(model)]="filter.text" [options]="filter.selectOptsApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true"></pl-input-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelect'">
+                    <pl-input-multi-select [(model)]="filter.textArray" [currentLabelOpts]="filter.displayOptsInCurrentLabel" [options]="filter.selectOptsMulti" [placeholder]="(filter.placeholder || '&nbsp;')" (onChange)="onFilter($event)"></pl-input-multi-select>
+                </div>
+                <div class="input" *ngIf="filter.type === 'multiSelectApi'">
+                    <pl-input-multi-select-api [(model)]="filter.textArray" [options]="filter.selectOptsMultiApi" [loading]="filter.searchLoading" (onSearch)="search(filter.value, $event)" (onChange)="onFilter($event)" [filterPlaceholder]="(filter.placeholder || '')" [modelOptions]="(filter.modelOptions || [])" [searchByDefault]="true" [resultsLimitedText]="filter.optionsLimitedText" [resultsTotalCount]="filter.selectOptsMultiApiTotalCount"></pl-input-multi-select-api>
+                </div>
+                <div class="input" *ngIf="filter.type === 'checkbox'">
+                    <pl-input-checkbox-group [(model)]="filter.textArray" [options]="filter.selectOptsCheckbox" (onChange)="onFilter($event)" [horizontal]="true" [optionWidth]="(filter.optionWidth || '100px')"></pl-input-checkbox-group>
+                </div>
+                <pl-icon *ngIf="!filter.noRemove" class="remove-filter-btn" [svg]="'close-inverted'" [scale]="1" [verticalAlign]="'-10px'" (click)="removeFilter(index, filter)"></pl-icon>
+            </div>
+        </div>
+    </div>
+</div>

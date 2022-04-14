@@ -1,0 +1,46 @@
+@import '../core/colors.less';
+@import '../core/icons.less';
+
+:host {
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+.icon-overlay {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+
+    &.complete {
+        background-image: @circle-check-green-svg;
+    }
+
+    &.error {
+        background-image: @alert-red-svg;
+    }
+}
+
+.meter-background {
+    display: flex;
+    background-color: @gray-light;
+    height: 33%;
+    width: 100%;
+
+    .meter {
+        background-color: @blue-medium;
+        height: 100%;
+        width: 0;
+
+        &.complete {
+            background-color: @green;
+        }
+
+        &.error {
+            background-color: @red;
+        }
+    }
+}

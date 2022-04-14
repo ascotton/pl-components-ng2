@@ -1,0 +1,12 @@
+/*
+  hidden visually, but not aurally
+  logical opposite of [aria-hidden="true"]
+  https://a11yproject.com/posts/how-to-hide-content/
+*/
+.visually-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+}

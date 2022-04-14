@@ -1,0 +1,140 @@
+@import "../core/flexbox.less";
+@import "../core/layout.less";
+@import "../core/spacing.less";
+@import "../core/components-defaults/pl-input.less";
+
+@line-height: 30px;
+
+.pl-input-select {
+  outline: none;
+
+  &:focus {
+    .select-and-options {
+      outline: @pl-input-outline;
+    }
+
+    .select-button {
+      border-color: @pl-input-border-focus !important;
+    }
+  }
+
+  &.focused {
+    .select-and-options {
+      z-index: 100;
+    }
+
+    .select-button {
+      border-color: @pl-input-border-focus;
+
+      .label,
+      .icon {
+        border-color: @pl-input-border-focus;
+      }
+      .icon {
+        fill: @pl-input-select-button-arrow;
+      }
+    }
+  }
+
+  .dropup {
+    bottom: 100%;
+    margin-top: -25vh;
+  }
+
+  @media (max-width: 1700px) {
+    .dropup {
+      margin-top: -15vh;
+    }
+  }
+
+  // @media (min-width: 1000px) {
+  @media (min-width: 2100px) {
+    .dropup {
+      margin-top: -15vh;
+    }
+  }
+
+  .dropdown {
+    top: @line-height;
+    border-color: @pl-input-border-focus;
+    background-color: @pl-input-dropdown-background;
+    .sticky {
+        top: 0;
+        position: sticky;
+    }
+    .overlay {
+        background: white;
+    }
+  }
+
+  &.styleInline {
+    color: inherit;
+
+    .dropdown {
+      color: @pl-input-color;
+    }
+
+    .select-button {
+      border: none;
+      background-color: transparent;
+      font-weight: bold;
+
+      .label {
+        border: none;
+        padding: 0;
+      }
+    }
+  }
+
+  .select-button {
+    box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: @pl-input-select-button-background;
+    // Show on top of dropdown
+    z-index: 51;
+    position: relative;
+
+    .label,
+    .icon {
+      border-color: @pl-input-border;
+    }
+
+    .label {
+      padding: 0px 12px;
+      border-right: solid 1px @pl-input-border;
+      line-height: @line-height;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      &.placeholder {
+        color: @pl-input-placeholder;
+      }
+    }
+
+    .icon {
+      padding: 3px 8px;
+      &:not(.customFill) {
+        fill: @pl-input-border;
+      }
+    }
+  }
+
+  .option {
+    background-color: @pl-input-option-background;
+    border-bottom: solid 1px @pl-input-option-border;
+    .padding-lr;
+    .padding-tb;
+    cursor: pointer;
+
+    &:hover {
+      background-color: @pl-input-option-background-hover;
+    }
+
+    &.disabled {
+      color: @pl-input-option-color-disabled;
+      cursor: default;
+    }
+  }
+}

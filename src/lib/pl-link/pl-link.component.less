@@ -1,0 +1,19 @@
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-link.less';
+
+.pl-link {
+    cursor: pointer;
+
+    .link {
+        display: block;
+        // Hack in order to not resize when transition to a bolder font
+        &:after {
+            content: attr(data-label);
+            font-weight: 900;
+            display: block;
+            height: 0;
+            visibility: hidden;
+        }
+    }
+}

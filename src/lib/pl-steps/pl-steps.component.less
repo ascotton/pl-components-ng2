@@ -1,0 +1,137 @@
+@import '../core/flexbox.less';
+@import '../core/spacing.less';
+
+@import '../core/components-defaults/pl-steps.less';
+
+.pl-steps {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    text-align: center;
+
+    .step {
+        position: relative;
+        cursor: default;
+        flex: 1;
+
+        a {
+            cursor: inherit;
+        }
+
+        .step-name {
+            color: @pl-steps-name-color;
+            margin-bottom: 3px;
+            text-align: center;
+        }
+        .circle {
+            box-sizing: border-box;
+            position: relative;
+            border-radius: 22px;
+            color: @pl-steps-circle-color;
+            background-color: @pl-steps-circle-background-color;
+            margin: 0 auto;
+            padding-top: 5px;
+            border: 8px solid @pl-steps-circle-border-color;
+            z-index: 50;
+        }
+
+        &:first-child .progress-line { display: none; }
+
+        .progress-line {
+            position: absolute;
+            bottom: 21px;
+            right: 50%;
+            background-color: @pl-steps-line-color;
+            z-index: 1;
+            &:before {
+                position: absolute;
+                content: ' ';
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0;
+                transition: width 200ms cubic-bezier(0.215, 0.61, 0.355, 1) 50ms;
+                background-color: @pl-steps-line-color-visited;
+            }
+        }
+
+        &.visited, &.active {
+            cursor: pointer;
+        }
+        &.visited, &.active {
+            .step-name {
+                color: @pl-steps-name-color-visited;
+            }
+            .circle {
+                background-color: @pl-steps-circle-background-color-visited;
+            }
+            .progress-line:before {
+                width: 100%;
+            }
+        }
+
+        &.active {
+            .step-name {
+                font-weight: 700;
+                color: @pl-steps-name-color-visited;
+            }
+            .circle {
+                background-color: @pl-steps-circle-background-color-active;
+            }
+        }
+    }
+
+    &.vertical {
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        .step {
+            display: flex;
+            flex-flow: row-reverse nowrap;
+            padding: 5px 0;
+
+            .circle {
+                width: 20px;
+                height: 20px;
+                border: 0;
+                span { display: none; }
+            }
+            .step-name {
+                font-size: 18px;
+                margin-left: 9px;
+            }
+            .progress-line {
+                width: 2px;
+                height: 100%;
+                top: -50%;
+                left: 9px;
+            }
+            &.visited {
+                .circle {
+                    border: 6px solid @pl-steps-circle-border-color-visited;
+                    background-color: @pl-steps-circle-background-color-visited-vertical;
+                }
+            }
+            &.active {
+                .circle {
+                    background-color: @pl-steps-circle-background-color-active;
+                }
+            }
+        }
+    }
+
+    &.horizontal {
+
+        .step {
+            .circle {
+                width: 44px;
+                height: 44px;
+            }
+
+            .progress-line {
+                width: 100%;
+                height: 2px;
+            }
+        }
+    }
+}

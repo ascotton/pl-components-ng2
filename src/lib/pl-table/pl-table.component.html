@@ -1,0 +1,118 @@
+<div #containerEle class="pl-table" (window:resize)="onResizeEle($event)" (window:scroll)="onScrollEle($event)" [ngClass]="classesCards">
+    <div *ngIf="filterSelectOpts && filterSelectOpts.length" class="filters margin-b">
+        <div *ngIf="showClearAllFiltersBar" class="margin-small-b">
+            <div>
+                <div class="inline-block margin-r total">Total: <b>{{ dataMeta.count | commify }}</b></div>
+                <div *ngIf="filtersVisible" class="inline-block margin-r hide-filters-btn" (click)="toggleFiltersVisible()">Hide Filters</div>
+                <div *ngIf="!filtersVisible" class="inline-block margin-r show-filters-btn" (click)="toggleFiltersVisible()">Show Filters</div>
+                <!-- <div class="inline-block add-filter-btn" [ngClass]="classesAddFilter" (click)="toggleAddFilterVisible()">Add Filter</div> -->
+                <span [hidden]="!filtersVisible">
+                    <pl-input-select class="inline-block add-filter-btn" [ngClass]="classesAddFilter" [(model)]="addFilterColumn" [options]="addFilterSelectOpts" [placeholder]="'Add Filter'" [styleInline]="true" [placeholderColor]="'inherit'" [dropdownMinWidth]="150" (onChange)="addFilterColumnChange()"></pl-input-select>
+                    <div class="inline-block clear-all-filters-btn margin-r" [ngClass]="classesClearFilters" (click)="clearAllFilters()">Clear All Filters</div>
+                </span>
+            </div>
+            <!-- <div [hidden]="!addFilterVisible">
+                <pl-input-select class="select" [(model)]="addFilterColumn" [options]="addFilterSelectOpts" [placeholder]="'Choose a filter to add'" (onChange)="addFilterColumnChange()"></pl-input-select>
+            </div> -->
+        </div>
+        <div [hidden]="!filtersVisible" class="x-qa-active-filters">
+            <div *ngFor="let filter of filters; let index = index;" class="filter inline-block margin-r margin-b">
+                <div class="inline-block filter-name margin-r"><b>{{ filter.title }}</b></div>
+                <div class="input" *ngIf="!filter.selectOpts || !filter.selectOpts.length">
+                    <pl-input-text [(model)]="filter.text" [clearButton]="true" (onChange)="filterKeyup($event)" [placeholder]="'Type to filter..'"></pl-input-text>
+                </div>
+                <div class="input" *ngIf="filter.selectOpts && filter.selectOpts.length">
+                    <pl-input-select [(model)]="filter.text" [options]="filter.selectOpts" [filter]="true" (onChange)="onFilter($event)" [emptyOption]="true"></pl-input-select>
+                </div>
+                <pl-icon *ngIf="!filter.noRemove" class="remove-filter-btn" [svg]="'close-inverted'" [scale]="1" [verticalAlign]="'-10px'" (click)="removeFilter(index, filter)"></pl-icon>
+            </div>
+        </div>
+        <!-- <div>
+            <pl-input-select class="select" [(model)]="filterColumn" [options]="filterSelectOpts" (onChange)="filterColumnChange()"></pl-input-select>
+            <div class="input" *ngIf="!currentFilterSelectOpts.length">
+                <pl-input-text [(model)]="filterText" [clearButton]="true" (onChange)="filterKeyup($event)" [placeholder]="'Type to filter..'"></pl-input-text>
+            </div>
+            <div class="input" *ngIf="currentFilterSelectOpts.length">
+                <pl-input-select [(model)]="filterText" [options]="currentFilterSelectOpts" [filter]="true" (onChange)="onFilter()"></pl-input-select>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="header-wrapper relative">
+        <div #headerSpacerEle [ngStyle]="stylesHeaderSpacer">&nbsp;</div>
+        <div #headerEle class="header-row" [ngStyle]="stylesHeader" [ngClass]="classesHeaderRow">
+            <div [hidden]="!loading" class="header-column-content">
+                <pl-dot-loader [align]="'center'"></pl-dot-loader>
+            </div>
+            <div *ngIf="dataDisplay.length || loading" [hidden]="loading">
+                <div class="header-row-main">
+                    <div *ngFor="let col of columns" class="header-column" [ngClass]="col['classesHeader']">
+                        <div *ngIf="col.orderable" class="flexbox header-column-content" (click)="order(col)">
+                            <div class="col-title margin-r">{{ col.title }}</div>
+                            <pl-icon class="col-arrow" *ngIf="col.orderDirection === 'ascending'" [svg]="'chevron-up'" [scale]="0.6" [verticalAlign]="'-4px'"></pl-icon>
+                            <pl-icon class="col-arrow" *ngIf="col.orderDirection === 'descending'" [svg]="'chevron-down'" [scale]="0.6" [verticalAlign]="'-4px'"></pl-icon>
+                            <!-- Faded sort indicator if not sorted yet but a sortable column -->
+                            <pl-icon class="col-arrow" *ngIf="(col.orderDirection !== 'descending' && col.orderDirection !== 'ascending')" [svg]="'chevron-up-down'" [scale]="0.7" [verticalAlign]="'-4px'"></pl-icon>
+                        </div>
+                        <div *ngIf="!col.orderable" class="header-column-content">
+                            {{ col.title }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!rowHrefFn" class="body-rows">
+        <div *ngFor="let row of dataDisplay; let rowIndex = index" class="body-row" [ngClass]="classesRow" [ngStyle]="stylesRow">
+            <div class="body-row-main">
+                <div class="body-column" [ngClass]="columns[colIndex]['classesBody']" *ngFor="let col of row.cols; let colIndex = index" (click)="clickCell(rowIndex, colIndex)">
+                    <div *ngIf="columns[colIndex]['htmlFn']" class="body-column-cell" [innerHtml]="col"></div>
+                    <div *ngIf="!columns[colIndex]['htmlFn']" class="body-column-cell">{{ col }}</div>
+                </div>
+            </div>
+            <div *ngIf="row.expand" class="body-row-expand" [innerHtml]="row.expand"></div>
+        </div>
+    </div>
+    <div *ngIf="rowHrefFn" class="body-rows">
+        <a *ngFor="let row of dataDisplay; let rowIndex = index" class="body-row link-none" [routerLink]="row.href" [queryParams]="row.hrefQueryParams" [ngClass]="classesRow" [ngStyle]="stylesRow">
+            <div class="body-row-main">
+                <div class="body-column" [ngClass]="columns[colIndex]['classesBody']" *ngFor="let col of row.cols; let colIndex = index" (click)="clickCell(rowIndex, colIndex)">
+                    <div *ngIf="columns[colIndex]['htmlFn']" class="body-column-cell" [innerHtml]="col"></div>
+                    <div *ngIf="!columns[colIndex]['htmlFn']" class="body-column-cell">{{ col }}</div>
+                </div>
+            </div>
+            <div *ngIf="row.expand" class="body-row-expand" [innerHtml]="row.expand"></div>
+        </a>
+    </div>
+
+    <div *ngIf="dataMeta.count && (alwaysShowFooter || dataMeta.totalPages > 1)" class="footer flexbox">
+        <div class="footer-total">Total: <b>{{ dataMeta.count | commify }}</b></div>
+        <div class="flex1 pages">
+            <button pl-button class="page-arrow-prev" [disabled]="pageArrowsDisabled.prev" (click)="prevPage()">
+                <pl-icon class="page-arrow-icon" [svg]="'chevron-left'" [scale]="0.6" [verticalAlign]="'-1px'"></pl-icon>
+            </button>
+            <!-- <pl-icon class="page-arrow-prev" (click)="prevPage()" [svg]="'chevron-left'"></pl-icon> -->
+            <span>
+                Page
+                <!-- {{ this.plFormatter.commify(dataMeta.currentPage) }} -->
+                <pl-input-text class="current-page-input" [type]="'number'" [(model)]="dataMeta.currentPage" [min]="1" [max]="dataMeta.totalPages" [textAlignInput]="'center'" (onBlur)="changePage($event)" (keyup)="changePageKeyup($event)"></pl-input-text>
+                of {{ dataMeta.totalPages | commify }}
+            </span>
+            <button pl-button class="page-arrow-next" [disabled]="pageArrowsDisabled.next" (click)="nextPage()">
+                <pl-icon class="page-arrow-icon" [svg]="'chevron-right'" [scale]="0.6" [verticalAlign]="'-1px'"></pl-icon>
+            </button>
+            <!-- <pl-icon class="page-arrow-next" (click)="nextPage()" [svg]="'chevron-right'"></pl-icon> -->
+        </div>
+        <div class="footer-items-per-page">
+            <div class="items-per-page-label inline-block margin-r">Items per Page:</div>
+            <!-- <b>{{ dataMeta.pageSize }}</b> -->
+            <pl-input-select class="inline-block" [(model)]="dataMeta.pageSize" [options]="pageSizeOpts" [styleInline]="false" [dropdownMinWidth]="50" [placeholder]="''" [filter]="false" (onChange)="changePageSize()"></pl-input-select>
+        </div>
+    </div>
+
+    <div *ngIf="!dataDisplay.length && !loading" class="no-data">
+        <!-- No data to display. -->
+        {{ noResultsText }}
+    </div>
+</div>

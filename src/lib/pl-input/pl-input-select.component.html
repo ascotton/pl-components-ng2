@@ -1,0 +1,43 @@
+<!-- include tabindex so this component can receive focus like any other input element -->
+<div #inputSelect class="pl-input-select" tabindex="0" [ngClass]="classesContainer" (keydown)="keyDown($event);" (focusout)="onFocusout()">
+    <pl-input-label [label]="label" [required]="required"></pl-input-label>
+
+    <div *ngIf="lunrIndexing">
+        <pl-dot-loader></pl-dot-loader>
+    </div>
+
+    <div class="select-and-options border relative" *ngIf="!lunrIndexing">
+        <div class="select-button flexbox" (click)="clickButton()">
+            <div class="flex1 label" [ngClass]="{'placeholder':model==''}" [ngStyle]="stylesLabel"
+                [innerHTML]="currentLabel | safeHtml">
+            </div>
+            <pl-icon class="icon" [ngClass]="classesIcon" [svg]="'chevron-down'" [scale]="iconScale" [verticalAlign]="iconVerticalAlign"></pl-icon>
+        </div>
+
+        <pl-input-dropdown
+            class="dropdown"
+            [hidden]="!focused" 
+            [minWidth]="dropdownMinWidth"
+            [maxHeight]="dropdownMaxHeight"
+            [containerSelector]="dropdownContainerSelector"
+            [class.dropup]="dropUp">
+            <div class="options-container">
+                <div *ngIf="useFilter || useBigFilter" class="filter padding sticky overlay">
+                    <pl-input-text [(model)]="filterModel" [iconLeft]="'magnifier'" [clearButton]="true" [placeholder]="filterPlaceholder" [focused]="focused" [onPreviewKeyDown]="onSearchInputPreviewKeyDown" (onChange)="onChangeFilter()"></pl-input-text>
+                </div>
+                <div class="options-messages overlay">
+                    <div *ngIf="truncatedResults" class="message">
+                        First {{bigFilterDisplayLimit}} of {{truncatedResults}} options.
+                    </div>
+                </div>
+                <div class="options">
+                    <div *ngFor="let option of filteredOptions" class="option" [ngClass]="option.classes" [innerHTML]="option.label ? (option.value === model && highlightSelected ? '<strong>' + option.label + '</strong>' : option.label) : safeHtml" (click)="selectOption(option, $event)">
+                    </div>
+                </div>
+            </div>
+        </pl-input-dropdown>
+
+    </div>
+
+    <pl-input-errors *ngIf="formCtrl" [formCtrl]="formCtrl" [name]="name" [messages]="validationMessages"></pl-input-errors>
+</div>

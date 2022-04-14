@@ -1,0 +1,16 @@
+@import '../core/components-defaults/pl-input.less';
+
+:host {
+    position: absolute;
+    min-width: 100%;
+    border: solid 1px @pl-input-dropdown-border;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 50;
+    display: block;
+
+    &.hidden {
+        display: none;
+    }
+}
